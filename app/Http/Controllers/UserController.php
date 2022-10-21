@@ -72,4 +72,63 @@ class UserController extends Controller
         // Redirect to the homepage
         return redirect('/')->with('success','You have been logged in.');
     }
+
+    // Show User Profile
+    public function edit(){
+        return view('users.edit',[
+            'heading' => 'Profile',
+        ]);
+    }
+
+    // Update User Profile
+    public function update(Request $user){
+
+        // Validate the request
+        $data = $user->validate([
+            'username' => ['required', Rule::unique('users','username')->ignore(auth()->user())],
+            'email' => 'required|email',
+            'name' => ['required','min:3','max:255'],
+            'surname' => ['required','min:3','max:255'],
+            'password' => 'nullable|confirmed|min:6',
+        ]);
+
+        // Hash the password
+        if($data['password']){
+            $data['password'] = bcrypt($data['password']);
+            auth()->user()->update($data);
+            // Log out the user
+            auth()->logout();
+        }else{
+            unset($data['password']);
+            // Update the user
+            auth()->user()->update($data);
+        }
+
+        return back()->with('success','Your profile has been updated.');
+    }
+
+    // Update User Avatar
+    public function updateAvatar(Request $user){
+        // Validate the request
+        $data = $user->validate([
+            'avatar' => 'required|image',
+        ]);
+        // If the user already has an avatar, delete the old one from storage and the database
+        if(auth()->user()->avatar){
+            // Delete the old avatar from storage
+            unlink(storage_path('app/public/' . auth()->user()->avatar));
+            // Delete the old avatar from the database
+            auth()->user()->update([
+                'avatar' => null,
+            ]);
+        }
+
+        // Upload the image
+        $data['avatar'] = $user->file('avatar')->store('img/avatars','public');
+
+        // Update the user
+        auth()->user()->update($data);
+
+        return back()->with('success','Your avatar has been updated.');
+    }
 }

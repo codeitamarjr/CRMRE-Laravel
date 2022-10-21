@@ -123,7 +123,7 @@
                             class="border rounded-circle img-profile"
                             src="assets/{{auth()->user()->picture}}"></a>
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                        <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
+                        <a class="dropdown-item" href="/users/edit"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                         <a class="dropdown-item" href="/register"><i class="fas fa-user-plus fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Register New User</a>

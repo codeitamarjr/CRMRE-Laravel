@@ -19,7 +19,7 @@ class PRSFactory extends Factory
         return [
             // Unique PRS Code
             'prs_code' => 'PRS' . $this->faker->unique()->numberBetween(1, 3),
-            'name' => fake()->company(),
+            'name' => fake()->company() . ' Property Management',
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),

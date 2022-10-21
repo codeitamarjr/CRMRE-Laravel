@@ -7,9 +7,10 @@ namespace Database\Seeders;
 use App\Models\PRS;
 use App\Models\User;
 use App\Models\Client;
-use App\Models\Applications;
+use App\Models\Clients;
 use App\Models\Enquiries;
 use App\Models\Properties;
+use App\Models\Applications;
 use App\Models\EmailSetting;
 use Illuminate\Database\Seeder;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         PRS::factory(3)->create();
         
-        Client::factory(3)->create();
+        Clients::factory(2)->create();
 
         Properties::factory(10)->create();
         
@@ -66,6 +67,5 @@ class DatabaseSeeder extends Seeder
 
         Applications::factory(10000)->create();
 
-        \App\Models\Listing::factory(10)->create();
     }
 }

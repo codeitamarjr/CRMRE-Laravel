@@ -32,7 +32,8 @@ use App\Http\Controllers\EnquiriesController;
 
 // Home Page open dashboard
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
-// All enquiries
+
+// Show All enquiries
 Route::get('/enquiries', [EnquiriesController::class, 'index'])->middleware('auth');
 // Create Enquiry
 Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middleware('auth');
@@ -40,11 +41,11 @@ Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middlew
 Route::post('/enquiries', [EnquiriesController::class, 'store'])->middleware('auth');
 // Edit Enquiry
 Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit'])->middleware('auth');
-// Edit Enquiry Update
+// Update Enquiry
 Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update'])->middleware('auth');
 // Delete Enquiry
 Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy'])->middleware('auth');
-// Single Enquiry
+// Show Single Enquiry
 Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
 
 // Show Register / Create User Form
@@ -57,20 +58,9 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 // Login User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-
-// All Listings
-Route::get('/listings', function () {
-    return view('listings',[
-        'heading' => 'Listings',
-        'listings' => Listing::all()
-    ]);
-});
-
-// Single listing
-Route::get('/listings/{id}', function ($id) {
-    return view('listing',[
-        'listing' => Listing::find($id)
-    ]);
-});
-
-
+// Show User Profile
+Route::get('/users/edit', [UserController::class, 'edit'])->middleware('auth');
+// Update User Profile
+Route::put('/users/update', [UserController::class, 'update'])->middleware('auth');
+// Update User Avatar
+Route::post('/users/avatar', [UserController::class, 'updateAvatar'])->middleware('auth');
