@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientsController;
 use App\Models\Listing;
 use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EnquiriesController;
@@ -28,24 +30,33 @@ use App\Http\Controllers\EnquiriesController;
 // PUT/PATCH /resource/{id} - update
 // DELETE /resource/{id} - destroy
 
+// Home Page open dashboard
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 // All enquiries
-Route::get('/enquiries', [EnquiriesController::class, 'index']);
+Route::get('/enquiries', [EnquiriesController::class, 'index'])->middleware('auth');
 // Create Enquiry
-Route::get('/enquiries/create', [EnquiriesController::class, 'create']);
+Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middleware('auth');
 // Store Enquiry Data
-Route::post('/enquiries', [EnquiriesController::class, 'store']);
+Route::post('/enquiries', [EnquiriesController::class, 'store'])->middleware('auth');
 // Edit Enquiry
-Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit']);
+Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit'])->middleware('auth');
 // Edit Enquiry Update
-Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update']);
+Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update'])->middleware('auth');
 // Delete Enquiry
-Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy']);
+Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy'])->middleware('auth');
 // Single Enquiry
-Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show']);
+Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
 
 // Show Register / Create User Form
-Route::get('/register', [UserController::class, 'create']);
-
+Route::get('/register', [UserController::class, 'create'])->middleware('auth');
+// Create New User
+Route::post('/users', [UserController::class, 'store'])->middleware('auth');
+// Logout User
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+// Show Login Form
+Route::get('/login', [UserController::class, 'login'])->name('login');
+// Login User
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 // All Listings
 Route::get('/listings', function () {

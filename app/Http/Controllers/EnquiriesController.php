@@ -14,9 +14,6 @@ class EnquiriesController extends Controller
             'heading' => 'Enquiries',
             'enquiries' => Enquiries::latest()->filter
             (request(['search']))->get()
-            // (function($enquiry){
-            //     return $enquiry->status == 'pending';
-            // })
         ]);
     }
 
@@ -38,17 +35,18 @@ class EnquiriesController extends Controller
     // Store Enquiry Data
     public function store(Request $request){
         $data = $request->validate([
-            'email_code' => 'required',
-            'enquiry_id' => 'required',
-            'prs_code' => 'required',
             'property_code' => 'required',
             'contact_name' => 'required',
             'contact_email' => 'required',
             'contact_phone' => 'required|numeric|min:5',
             'body' => 'required',
-            'title' => 'required',
-            'status' => 'required',
         ]);
+
+        $data['prs_code'] = auth()->user()->prs_code;
+        $data['enquiry_id'] = 'ENQM' .  uniqid() ;
+        $data['email_code'] = 'MANUALINPUT';
+        $data['title'] = 'Manual Enquiry';
+        $data['status'] = 'New';
         Enquiries::create($data);
         return redirect('/enquiries')->with('message', 'Enquiry Created Successfully');
     }

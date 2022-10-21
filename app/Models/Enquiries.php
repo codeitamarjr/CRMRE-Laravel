@@ -31,4 +31,9 @@ class Enquiries extends Model
             ->orWhere('body', 'like', '%'.$filters['search'].'%');
         }
     }
+
+    // Relationship to User
+    public function user(){
+        return $this->belongsTo(User::class, 'prs_code');
+    }
 }

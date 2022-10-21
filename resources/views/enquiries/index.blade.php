@@ -46,7 +46,8 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody> @foreach ($enquiries as $enquiry)
+                {{-- Filter just enquiries which the user has access to --}}
+                <tbody> @foreach ($enquiries->where('prs_code', '=', auth()->user()->prs_code ) as $enquiry)
 
                     <x-row-enquiries :enquiry="$enquiry" />
 

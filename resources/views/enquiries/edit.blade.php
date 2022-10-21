@@ -36,10 +36,8 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <h6 class="mb-0">Property</h6>
-                                                    <select class="form-select" name="property_code">
-                                                    <option value="PROP1">Property 1</option>
-                                                    <option value="PROP2">Property 2</option>
-                                                    </select>
+                                                    {{-- HTML Select listing all clients --}}
+                                                    <x-select-properties />
                                                 </div>
                                             </div>
                                                 <p></p>
