@@ -85,6 +85,8 @@ Route::post('/clients/logo', [ClientsController::class, 'updateLogo'])->middlewa
 Route::get('/properties', [PropertiesController::class, 'index'])->middleware('auth');
 // Create Property
 Route::get('/properties/create', [PropertiesController::class, 'create'])->middleware('auth');
+// Store Property Data
+Route::post('/properties', [PropertiesController::class, 'store'])->middleware('auth');
 // Edit Property
 Route::get('/properties/{property}/edit', [PropertiesController::class, 'edit'])->middleware('auth');
 // Update Property

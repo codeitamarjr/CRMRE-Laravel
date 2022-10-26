@@ -23,6 +23,28 @@ class PropertiesController extends Controller
         ]);
     }
 
+    // Store Property Data
+    public function store(Request $request){
+        $data = $request->validate([
+            'client_code' => 'required',
+            'type' => 'required',
+            'status' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'website' => 'required',
+            'description' => 'required',
+            'email_code' => 'required',
+        ]);
+        $data['property_code'] = 'PROP' .  uniqid() ;
+
+        Properties::create($data);
+        return redirect('/properties')->with('message', 'Property Created Successfully');
+    }
+
     // Edit Property
     public function edit(Properties $property){
         return view('properties.edit', [

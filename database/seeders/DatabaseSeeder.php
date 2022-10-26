@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         Properties::factory(10)->create();
         
         EmailSetting::create([
+            'prs_code' => 'PRS1',
             'email_code' => 'EMAIL0001',
             'service_provider' => 'G Demo Provider',
             'service_name' => 'Gmail',

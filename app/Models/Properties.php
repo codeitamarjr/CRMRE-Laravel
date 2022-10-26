@@ -20,6 +20,8 @@ class Properties extends Model
         'email',
         'phone',
         'logo',
+        'description',
+        'email_code',
         'prs_code',
         'client_code',
         'property_code',

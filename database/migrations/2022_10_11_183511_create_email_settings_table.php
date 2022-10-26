@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('email_settings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('prs_code');
             $table->string('email_code');
             $table->string('service_provider');
             $table->string('service_name');
