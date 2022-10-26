@@ -25,7 +25,7 @@ class EnquiriesController extends Controller
         ]);
     }
 
-    // Show Create Enquiry Form
+    // Create Enquiry Form
     public function create(){
         return view('enquiries.create',[
             'heading' => 'Create Manual Enquiry'
@@ -43,7 +43,7 @@ class EnquiriesController extends Controller
         ]);
 
         $data['prs_code'] = auth()->user()->prs_code;
-        $data['enquiry_id'] = 'ENQM' .  uniqid() ;
+        $data['enquiry_id'] = 'ENQ' .  uniqid() ;
         $data['email_code'] = 'MANUALINPUT';
         $data['title'] = 'Manual Enquiry';
         $data['status'] = 'New';
@@ -53,7 +53,6 @@ class EnquiriesController extends Controller
 
     // Show Edit Enquiry Form
     public function edit(Enquiries $enquiries){
-        //dd($enquiries);
         return view('enquiries.edit',[
             'heading' => 'Edit Enquiry',
             'enquiry' => $enquiries
@@ -75,7 +74,6 @@ class EnquiriesController extends Controller
                 'status' => 'required',
             ]);
             $enquiries->update($data);
-            // Go back to the previus page showing a successfully message
             return back()->with('message', 'Enquiry Updated Successfully');
         }
 

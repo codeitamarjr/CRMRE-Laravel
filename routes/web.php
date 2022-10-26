@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\ClientsController;
 use App\Models\Listing;
 use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiriesController;
+use App\Http\Controllers\PropertiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,9 @@ Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy'])
 // Show Single Enquiry
 Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
 
-// Show Register / Create User Form
+// Create User Form
 Route::get('/register', [UserController::class, 'create'])->middleware('auth');
-// Create New User
+// Store New User
 Route::post('/users', [UserController::class, 'store'])->middleware('auth');
 // Logout User
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
@@ -58,9 +59,35 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 // Login User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-// Show User Profile
+// Edit User Profile
 Route::get('/users/edit', [UserController::class, 'edit'])->middleware('auth');
 // Update User Profile
 Route::put('/users/update', [UserController::class, 'update'])->middleware('auth');
 // Update User Avatar
 Route::post('/users/avatar', [UserController::class, 'updateAvatar'])->middleware('auth');
+
+// Show All Clients
+Route::get('/clients', [ClientsController::class, 'index'])->middleware('auth');
+// Create Client
+Route::get('/clients/create', [ClientsController::class, 'create'])->middleware('auth');
+// Store Client Data
+Route::post('/clients', [ClientsController::class, 'store'])->middleware('auth');
+// Edit Client
+Route::get('/clients/{client}/edit', [ClientsController::class, 'edit'])->middleware('auth');
+// Update Client
+Route::put('/clients/{client}', [ClientsController::class, 'update'])->middleware('auth');
+// Delete Client
+Route::delete('/clients/{client}', [ClientsController::class, 'destroy'])->middleware('auth');
+// Update Client Logo
+Route::post('/clients/logo', [ClientsController::class, 'updateLogo'])->middleware('auth');
+
+// Show All Properties
+Route::get('/properties', [PropertiesController::class, 'index'])->middleware('auth');
+// Create Property
+Route::get('/properties/create', [PropertiesController::class, 'create'])->middleware('auth');
+// Edit Property
+Route::get('/properties/{property}/edit', [PropertiesController::class, 'edit'])->middleware('auth');
+// Update Property
+Route::put('/properties/{property}', [PropertiesController::class, 'update'])->middleware('auth');
+// Delete Property
+Route::delete('/properties/{property}', [PropertiesController::class, 'destroy'])->middleware('auth');

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email_code')->references('email_code')->on('email');
             $table->string('enquiry_id'); // Generate trough the code an unique ID
             $table->string('prs_code')->references('prs_code')->on('prs');
-            $table->string('property_code')->references('property_code')->on('property');
+            $table->string('property_code')->references('property_code')->on('property')->nullable();
             $table->string('email')->nullable();
             $table->string('title')->nullable();
             $table->dateTime('date')->nullable();
