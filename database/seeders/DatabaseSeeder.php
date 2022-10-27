@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         
         Clients::factory(2)->create();
 
-        Properties::factory(10)->create();
+        Properties::factory(5)->create();
         
         EmailSetting::create([
             'prs_code' => 'PRS1',
