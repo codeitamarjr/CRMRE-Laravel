@@ -27,12 +27,6 @@
                                 <div class="col-lg">
                                     <div class="card">
                                         <div class="card-body">
-                                            {{-- Input hidden to store email_code as Manual Input --}}
-                                            <input type="hidden" name="email_code" value="{{ $enquiry->email_code }}">
-                                            {{-- Input hidden to store enquiry_id as unique code numberBetween() --}}
-                                            <input type="hidden" name="enquiry_id" value="{{ $enquiry->enquiry_id }}">
-                                            {{-- Input hidden to store prs_code as PRS1 --}}
-                                            <input type="hidden" name="prs_code" value="{{ $enquiry->prs_code }}">
                                             <div class="row">
                                                 <div class="col">
                                                     <h6 class="mb-0">Property</h6>
@@ -76,10 +70,6 @@
                                                 </div>
                                             </div>
                                             <p></p>
-                                            {{-- Input hidder to store title as Manual Input --}}
-                                            <input type="hidden" name="title" value="Manual Enquiry">
-                                            {{-- Input hidden to store status as New --}}
-                                            <input type="hidden" name="status" value="New">
                                             <div class="row">
                                                 <div class="col-sm-1">
                                                 <button type="submit" class="btn btn-primary" >Save Changes</button>

@@ -9,21 +9,10 @@
     <div class="row mb-3">
         <div class="col-lg-4">
             <div class="card mb-3">
-                <form method="POST" action="/properties/logo" enctype="multipart/form-data">
                     @csrf     
-                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
-                        src="/assets/img/briefcase-solid.svg" width="160" height="160">
-                    <div class="mb-3">
-                        <input class="form-control" type="file" name="logo" id="logo">
-                    </div>
-                    @error('logo')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    <div class="mb-3">
-                        <button class="btn btn-primary btn-sm" type="submit">Update Photo</button>
-                    </div>
+                <div class="card-body text-center shadow">
+                    <i class="fa-10x fa-regular fa-building rounded-circle mb-3 mt-4 text-gray-400"></i>
                 </div>
-                </form>
             </div>
             
             
