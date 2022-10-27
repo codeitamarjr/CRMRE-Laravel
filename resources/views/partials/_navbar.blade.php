@@ -6,18 +6,33 @@
         </a>
         <hr class="sidebar-divider my-0">
         <ul class="navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item"><a class="nav-link active" href="/"><i
-                        class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="/enquiries"><i
-                        class="fas fa-user"></i><span>Enquiries</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="table.html"><i
-                        class="fas fa-table"></i><span>Table</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="login.html"><i
-                        class="far fa-user-circle"></i><span>Login</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="register.html"><i
-                        class="fas fa-user-circle"></i><span>Register</span></a></li>
+            <li class="nav-item"><a class="nav-link active" href="/">
+                <i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/enquiries">
+                <i class="fas fa-user"></i><span>Enquiries</span></a>
+            </li>
         </ul>
-        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                id="sidebarToggle" type="button"></button></div>
+        <div class="text-center d-none d-md-inline">
+            <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+        </div>
     </div>
 </nav>
+
+{{-- Remember sidebarToggle state --}}
+<script>
+    document.getElementById("sidebarToggle").addEventListener("click", function() {
+        if (localStorage.getItem('sidebarToggle') == 'true') {
+            localStorage.setItem('sidebarToggle', 'false');
+        } else {
+            localStorage.setItem('sidebarToggle', 'true');
+        }
+    });
+</script>
+
+{{-- Apply sidebarToggle state --}}
+<script>
+    if (localStorage.getItem('sidebarToggle') == 'true') {
+        document.getElementsByClassName('sidebar-dark')[0].classList.add('toggled');
+    }
+</script>
