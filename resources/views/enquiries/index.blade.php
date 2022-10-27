@@ -48,6 +48,8 @@
                     ->join('properties', 'enquiries.property_code', '=', 'properties.property_code')
                     ->where('enquiries.prs_code','=', Auth::user()->prs_code)
                     ->select('enquiries.*', 'properties.name as property_name')
+                    ->limit(1000)
+                    ->orderBy('enquiries.created_at', 'desc')
                     ->get();
                 @endphp
                 <tbody>
