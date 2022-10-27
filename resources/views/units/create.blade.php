@@ -59,7 +59,7 @@
                                         <div class="mb-3"><label class="form-label" for="type">
                                             <strong>Unit Type</strong></label>
                                             <select class="form-select" name="type">
-                                                <option selected value="">Select an Option</option>
+                                                <option selected value="{{ old('type') }}">{{ old('type') ? old('type') : 'Select an Option' }}</option>
                                                 <option value="House">House</option>
                                                 <option value="Apartment">Apartment</option>
                                                 <option value="Flat">Flat</option>
@@ -104,7 +104,7 @@
                                         <div class="mb-3"><label class="form-label" for="bedrooms">
                                             <strong>Bedrooms</strong></label>
                                             <select class="form-select" name="bedrooms">
-                                                <option selected value="">Select an Option</option>
+                                                <option selected value="{{ old('bedrooms') }}">{{ old('bedrooms') ? old('bedrooms') : 'Select an Option' }}</option>
                                                 <option value="1 Bedroom">1 Bedroom</option>
                                                 <option value="2 Bedrooms">2 Bedrooms</option>
                                                 <option value="3 Bedrooms">3 Bedrooms</option>
@@ -151,7 +151,7 @@
                                         <div class="mb-3"><label class="form-label" for="status">
                                             <strong>Status</strong></label>
                                             <select class="form-select" name="status">
-                                                <option selected>Select an Option</option>
+                                                <option selected value="{{ old('status') }}">{{ old('status') ? old('status'): 'Select an Option' }}</option>
                                                 <option value="Available">Available</option>
                                                 <option value="Unavailable">Unavailable</option>
                                                 <option value="Under Offer">Under Offer</option>
