@@ -67,7 +67,7 @@ class EnquiriesController extends Controller
                 'property_code' => 'required',
                 'contact_name' => 'required',
                 'contact_email' => 'required',
-                'contact_phone' => 'required|numeric|min:5',
+                'contact_phone' => 'required|min:5',
                 'body' => 'required',
             ]);
             $enquiries->update($data);

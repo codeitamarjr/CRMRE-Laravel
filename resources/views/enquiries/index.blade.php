@@ -43,11 +43,17 @@
                     </tr>
                 </thead>
                 {{-- Filter just enquiries which the user has access to --}}
-                <tbody> @foreach ($enquiries->where('prs_code', '=', auth()->user()->prs_code ) as $enquiry)
-
+                @php
+                    $enquiries = DB::table('enquiries')
+                    ->join('properties', 'enquiries.property_code', '=', 'properties.property_code')
+                    ->where('enquiries.prs_code','=', Auth::user()->prs_code)
+                    ->select('enquiries.*', 'properties.name as property_name')
+                    ->get();
+                @endphp
+                <tbody>
+                    @foreach ($enquiries as $enquiry)
                     <x-row-enquiries :enquiry="$enquiry" />
-
-                @endforeach
+                    @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
