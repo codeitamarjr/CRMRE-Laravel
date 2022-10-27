@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UnitsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiriesController;
@@ -93,3 +94,22 @@ Route::get('/properties/{property}/edit', [PropertiesController::class, 'edit'])
 Route::put('/properties/{property}', [PropertiesController::class, 'update'])->middleware('auth');
 // Delete Property
 Route::delete('/properties/{property}', [PropertiesController::class, 'destroy'])->middleware('auth');
+
+// Show All Units
+Route::get('/units', [UnitsController::class, 'index'])->middleware('auth');
+
+// Create Unit
+Route::get('/units/create', [UnitsController::class, 'create'])->middleware('auth');
+// Store Unit Data
+Route::post('/units', [UnitsController::class, 'store'])->middleware('auth');
+// Show Single Unit
+Route::get('/units/{unit}', [UnitsController::class, 'show'])->middleware('auth');
+// Edit Unit
+Route::get('/units/{unit}/edit', [UnitsController::class, 'edit'])->middleware('auth');
+// Update Unit
+Route::put('/units/{unit}', [UnitsController::class, 'update'])->middleware('auth');
+// Delete Unit
+Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware('auth');
+
+
+

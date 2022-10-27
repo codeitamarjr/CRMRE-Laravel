@@ -129,6 +129,7 @@
                         <a class="dropdown-item" href="/register"><i class="fas fa-user-plus fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Register New User</a>
                         <a class="dropdown-item" href="/clients"><i class="fas fa-briefcase fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Clients</a>
                         <a class="dropdown-item" href="/properties"><i class="fas fa-building fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Properties</a>
+                        <a class="dropdown-item" href="/units"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Units</a>
                         <div class="dropdown-divider"></div>
                         <form method="POST" action="/logout">
                             @csrf
