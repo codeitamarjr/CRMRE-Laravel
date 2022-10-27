@@ -19,8 +19,9 @@
     </div>
 </nav>
 
-{{-- Remember sidebarToggle state --}}
+
 <script>
+    //Remember sidebarToggle state
     document.getElementById("sidebarToggle").addEventListener("click", function() {
         if (localStorage.getItem('sidebarToggle') == 'true') {
             localStorage.setItem('sidebarToggle', 'false');
@@ -28,10 +29,7 @@
             localStorage.setItem('sidebarToggle', 'true');
         }
     });
-</script>
-
-{{-- Apply sidebarToggle state --}}
-<script>
+    // Apply sidebarToggle state
     if (localStorage.getItem('sidebarToggle') == 'true') {
         document.getElementsByClassName('sidebar-dark')[0].classList.add('toggled');
     }
