@@ -16,13 +16,14 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('applications_code')->unique();
+            $table->string('application_id')->unique();
+            $table->string('prs_code')->references('prs_code')->on('prs');
             $table->string('property_code')->references('property_code')->on('properties')->nullable();
-            $table->set('type', [ 'M', 'O', 'G' ]); // Main applicant, Occupant or Guarantor
-            $table->string('main_applicant_code')->nullable(); // Carry the main applicant code if the profile is an occupant or guarantor
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('dob')->nullable();
+            $table->set('type', [ 'Main', 'Joint', 'Guarantor' ]); // Main applicant, Joint applicant, Guarantor
+            $table->string('main_applicant_id')->references('applications_id')->on('applications')->nullable(); // If type is Joint or Guarantor, this is the main applicant
+            $table->string('name');
+            $table->string('surname');
+            $table->date('dob');
             $table->string('pps_number')->nullable();
             $table->string('email')->unique();
             $table->string('alternative_email')->nullable();
@@ -32,26 +33,28 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('postcode')->nullable();
-            $table->string('employment_status')->nullable();
+            $table->set('employment_status', ['Employed', 'Self-Employed', 'Unemployed', 'Student', 'Retired'] );
             $table->string('employment_sector')->nullable();
             $table->string('employment_position')->nullable();
             $table->string('employment_company')->nullable();
+            $table->string('employment_phone')->nullable();
             $table->date('employment_start_date')->nullable();
             $table->string('income')->nullable();
             $table->string('extra_income')->nullable();
+            $table->string('extra_income_source')->nullable();
             $table->string('landlord_name')->nullable();
             $table->string('landlord_phone')->nullable();
-            $table->date('preferred_move_in_date')->nullable();
+            $table->date('preferred_move_out_date')->nullable();
             $table->integer('car')->nullable();
             $table->integer('pet')->nullable();
             $table->string('pet_breed')->nullable();
-            $table->string('children')->nullable();
+            $table->integer('children')->nullable();
             $table->string('children_age')->nullable();
-            $table->string('hap')->nullable();
-            $table->string('hap_allowance')->nullable();
+            $table->string('HAP')->nullable();
+            $table->string('HAP_allowance')->nullable();
             $table->longText('notes')->nullable();
             $table->set('waiting_list', [ 'yes', 'no' ])->nullable();
-            $table->string('status')->nullable();
+            $table->set('status', ['New', 'In Progress', 'Approved', 'Declined', 'Cancelled', 'Withdrawn', 'Archived']); // New, In Progress, Approved, Declined, Cancelled, Withdrawn, Archived
         });
     }
 

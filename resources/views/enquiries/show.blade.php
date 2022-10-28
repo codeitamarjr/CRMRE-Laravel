@@ -95,7 +95,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="email-content">
-                                        <textarea id="tinyTextArea">{{ $enquiry['body'] }}</textarea>
+                                        <textarea class="form-control" rows="13" id="tinyTextArea">{{ $enquiry['body'] }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +114,7 @@
                 menubar: false,
                 statusbar: false,
                 height: 600,
+                noneditable_class: ‘uneditable',
             });
 </script>
 
