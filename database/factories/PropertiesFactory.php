@@ -18,7 +18,7 @@ class PropertiesFactory extends Factory
     {
         return [
             //
-            'property_code' => 'PROP' . $this->faker->unique()->numberBetween(1, 8),
+            'property_code' => 'PROP' . $this->faker->numberBetween(1, 3),
             'client_code' => 'CLT' . $this->faker->numberBetween(1, 3),
             'type' => 'Apartment',
             'status' => 'For Rent',

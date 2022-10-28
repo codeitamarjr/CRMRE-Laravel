@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('property_code');
+            $table->string('property_code')->unique();
             $table->string('client_code')->references('client_code')->on('clients')->onDelete('cascade');
             $table->string('type'); // Apartment, House, Land, Commercial
             $table->string('status'); // For Sale, For Rent, Sold, Rented
