@@ -6,11 +6,14 @@
         </a>
         <hr class="sidebar-divider my-0">
         <ul class="navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item"><a class="nav-link active" href="/">
+            <li class="nav-item"><a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="/">
                 <i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="/enquiries">
+            <li class="nav-item"><a class="nav-link {{ (request()->is('enquiries')) ? 'active' : '' }}" href="/enquiries">
                 <i class="fas fa-user"></i><span>Enquiries</span></a>
+            </li>
+            <li class="nav-item"><a class="nav-link {{ (request()->is('applications')) ? 'active' : '' }}" href="/applications">
+                <i class="fa-solid fa-id-card"></i><span>Applications</span></a>
             </li>
         </ul>
         <div class="text-center d-none d-md-inline">

@@ -11,6 +11,7 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiriesController;
 use App\Http\Controllers\PropertiesController;
+use App\Http\Controllers\ApplicationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,7 +98,6 @@ Route::delete('/properties/{property}', [PropertiesController::class, 'destroy']
 
 // Show All Units
 Route::get('/units', [UnitsController::class, 'index'])->middleware('auth');
-
 // Create Unit
 Route::get('/units/create', [UnitsController::class, 'create'])->middleware('auth');
 // Store Unit Data
@@ -110,6 +110,9 @@ Route::get('/units/{unit}/edit', [UnitsController::class, 'edit'])->middleware('
 Route::put('/units/{unit}', [UnitsController::class, 'update'])->middleware('auth');
 // Delete Unit
 Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware('auth');
+
+// Show All Applications
+Route::get('/applications', [ApplicationsController::class, 'index'])->middleware('auth');
 
 
 

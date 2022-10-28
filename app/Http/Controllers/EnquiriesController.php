@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class EnquiriesController extends Controller
 {
@@ -12,8 +14,14 @@ class EnquiriesController extends Controller
     public function index(){
         return view('enquiries.index',[
             'heading' => 'Enquiries',
-            'enquiries' => Enquiries::latest()->filter
-            (request(['search']))->get()
+            'enquiries' => Enquiries::latest()
+            ->join('properties', 'enquiries.property_code', '=', 'properties.property_code')
+            ->where('enquiries.prs_code','=', Auth::user()->prs_code)
+            ->select('enquiries.*', 'properties.name as property_name')
+            ->filter(request(['search']))
+            ->limit(1000)
+            ->orderBy('enquiries.created_at', 'desc')
+            ->get(),
         ]);
     }
 

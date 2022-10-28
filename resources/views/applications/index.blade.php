@@ -14,21 +14,15 @@
 
 <x-container>
 
-    {{-- Heading --}}
-<div class="d-sm-flex justify-content-between align-items-center mb-4">
-    <h3 class="text-dark mb-0">{{ $heading }}</h3>
-</div>
-
 <div class="card shadow">
     <div class="card-header py-3">
         <p class="text-primary m-0 fw-bold">
-            {{ $heading }}
-        {{-- Buttom to add enquiry --}}
-        <a href="/enquiries/create" class="btn btn-primary btn-sm float-end">Add Enquiry</a>
+        {{-- Buttom to add application --}}
+        <a href="/applications/create" class="btn btn-primary btn-sm float-end">Add application</a>
     </p>
     </div>
         <div class="card-body">
-            {{-- Datatable enquiries --}}
+            {{-- Datatable applications --}}
             <table id="dataTable" class="table table-striped dt-responsive nowrap w-100" style="width:100%">
                 <thead>
                     <tr>
@@ -36,15 +30,16 @@
                         <th>Property</th>
                         <th>Name</th>
                         <th>E-mail</th>
-                        <th>Title</th>
-                        <th></th>
-                        <th>Date Received</th>
+                        <th>Employement Sector</th>
+                        <th>Employement Position</th>
+                        <th>Income</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($enquiries as $enquiry)
-                    <x-row-enquiries :enquiry="$enquiry" />
+                    @foreach ($applications as $application)
+                    <x-row-applications :application="$application" />
                     @endforeach
                 </tbody>
                 <tfoot>
@@ -53,15 +48,16 @@
                         <th>Property</th>
                         <th>Name</th>
                         <th>E-mail</th>
-                        <th>Title</th>
-                        <th></th>
-                        <th>Date Received</th>
+                        <th>Employement Sector</th>
+                        <th>Employement Position</th>
+                        <th>Income</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
 
-            {{-- End Datatable enquiries --}}
+            {{-- End Datatable applications --}}
         </div>
     </div>
 
