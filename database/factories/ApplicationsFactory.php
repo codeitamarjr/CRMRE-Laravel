@@ -17,7 +17,6 @@ class ApplicationsFactory extends Factory
     public function definition()
     {
         return [
-            //
             'application_id' => 'AP' . $this->faker->unique()->numberBetween(),
             'prs_code' => 'PRS' . $this->faker->numberBetween(1, 3),
             'property_code' => 'PROP' . $this->faker->numberBetween(1, 17),
@@ -42,6 +41,13 @@ class ApplicationsFactory extends Factory
             'landlord_name' => $this->faker->name(),
             'landlord_phone' => $this->faker->phoneNumber(),
             'preferred_move_out_date' => $this->faker->date(),
+            'car' => $this->faker->numberBetween(0, 1),
+            'pet' => $this->faker->numberBetween(0, 1),
+            'pet_breed' => $this->faker->randomElement(['Dog', 'Cat', 'Bird', 'Fish', 'Rabbit']),
+            'children' => $this->faker->numberBetween(0, 1),
+            'children_age' => $this->faker->numberBetween(1, 18),
+            'HAP' => $this->faker->randomElement(['yes', 'no']),
+            'HAP_allowance' => $this->faker->numberBetween(100, 1000),
             'notes' => $this->faker->text(),
             'waiting_list' => $this->faker->randomElement(['yes', 'no']),
             'status' => $this->faker->randomElement(['New', 'In Progress', 'Approved', 'Declined', 'Cancelled', 'Withdrawn', 'Archived']),

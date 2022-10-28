@@ -50,7 +50,7 @@ return new class extends Migration
             $table->string('pet_breed')->nullable();
             $table->integer('children')->nullable();
             $table->string('children_age')->nullable();
-            $table->string('HAP')->nullable();
+            $table->set('HAP', [ 'yes' , 'no' ])->nullable();
             $table->string('HAP_allowance')->nullable();
             $table->longText('notes')->nullable();
             $table->set('waiting_list', [ 'yes', 'no' ])->nullable();
