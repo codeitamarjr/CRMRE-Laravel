@@ -1,13 +1,8 @@
 @props(['property'])
 
 <tr class="table-row">
-    <td>    
-        <img class="rounded-circle me-2" width="25" height="25" src="{{ ($property->logo == null) ? '/assets/img/briefcase-solid.svg' : 'asset($property->logo)' }}">
-    </td>
-    <td>
-        {{ $property->client_name }}
-    </td>
-    </td>
+    <td><img class="rounded-circle me-2" width="25" height="25" src="{{ ($property->logo == null) ? '/assets/img/briefcase-solid.svg' : 'asset($property->logo)' }}"></td>
+    <td>{{ $property->client_name }}</td>
     <td>{{ $property->name }}</td>
     <td>00</td>
     <td>{{ $property->type }}</td>

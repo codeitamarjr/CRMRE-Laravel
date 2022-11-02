@@ -19,13 +19,15 @@ class UserController extends Controller
     public function store(Request $request){
         // Validate the request
         $data = $request->validate([
-            'prs_code' => 'required',
             'name' => ['required','min:3','max:255'],
             'surname' => ['required','min:3','max:255'],
             'username' => ['required', Rule::unique('users','username')],
             'email' => 'required|email',
             'password' => 'required|confirmed|min:6',
         ]);
+
+        // PRS code is the same as the user's PRS code
+        $data['prs_code'] = auth()->user()->prs_code;
 
         // Hash the password
         $data['password'] = bcrypt($data['password']);

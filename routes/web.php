@@ -113,6 +113,8 @@ Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware(
 
 // Show All Applications
 Route::get('/applications', [ApplicationsController::class, 'index'])->middleware('auth');
+// Create Application
+Route::get('/applications/create', [ApplicationsController::class, 'create'])->middleware('auth');
 
 
 

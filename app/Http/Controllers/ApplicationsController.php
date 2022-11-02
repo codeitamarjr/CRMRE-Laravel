@@ -21,4 +21,16 @@ class ApplicationsController extends Controller
             ->filter(request(['search']))->get()
         ]);
     }
+
+    // Show Application
+    public function show(Applications $application)
+    {
+        return view('applications.show', compact('application'));
+    }
+
+    // Create Application
+    public function create()
+    {
+        return view('applications.create');
+    }
 }

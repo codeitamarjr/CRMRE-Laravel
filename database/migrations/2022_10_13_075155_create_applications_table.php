@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('postcode')->nullable();
-            $table->set('employment_status', ['Employed', 'Self-Employed', 'Unemployed', 'Student', 'Retired'] );
+            $table->set('employment_status', ['Employed', 'Self-Employed', 'Unemployed', 'Student', 'Retired', 'Other'] );
             $table->string('employment_sector')->nullable();
             $table->string('employment_position')->nullable();
             $table->string('employment_company')->nullable();

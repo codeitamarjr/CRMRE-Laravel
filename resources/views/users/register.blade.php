@@ -17,8 +17,6 @@
                             </div>
                             <form method="POST" action="/users" class="user">
                                 @csrf
-                                {{-- Hidden form with the prs_code from the users table --}}
-                                <input type="hidden" name="prs_code" value="{{auth()->user()->prs_code}}">
                                 <div class="row mb-3">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input class="form-control form-control-user"
