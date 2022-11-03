@@ -115,6 +115,7 @@ Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware(
 Route::get('/applications', [ApplicationsController::class, 'index'])->middleware('auth');
 // Create Application
 Route::get('/applications/create', [ApplicationsController::class, 'create'])->middleware('auth');
-
-
-
+// Store Application Data
+Route::post('/applications', [ApplicationsController::class, 'store'])->middleware('auth');
+// Show Single Application
+Route::get('/applications/{application}', [ApplicationsController::class, 'show'])->middleware('auth');

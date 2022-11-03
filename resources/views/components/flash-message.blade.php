@@ -1,8 +1,8 @@
-@if(session()->has('message') | session()->has('success'))
-    <div class="toast-container position-absolute top-0 end-0 p-3" style="z-index: 11">
+@if (session()->has('message') | session()->has('success'))
+    <div class="toast-container position-absolute end-0 top-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <strong class="me-auto"><i class="rounded fas fa-circle-info"></i></strong>
+                <strong class="me-auto"><i class="fas fa-circle-info rounded"></i></strong>
                 <small>{{ now() }}</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -15,33 +15,32 @@
 
     <script>
         var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-        var toastList = toastElList.map(function (toastEl) {
+        var toastList = toastElList.map(function(toastEl) {
             return new bootstrap.Toast(toastEl)
         })
         toastList.forEach(toast => toast.show())
     </script>
 @endif
-@if ($errors->any())
-<div class="toast-container position-absolute top-0 end-0 p-3" style="z-index: 11">
-    @foreach ($errors->all() as $error)
-    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto"><i class="rounded fas fa-circle-info"></i></strong>
-            <small>{{ now() }}</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            {{ $error }}
+@if ($errors->any() | session()->has('error'))
+    <div class="toast-container position-absolute end-0 top-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto"><i class="fas fa-circle-info rounded"></i></strong>
+                <small>{{ now() }}</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ $errors->first() }}
+                {{ session('error') }}
+            </div>
         </div>
     </div>
-    @endforeach
-</div>
 
-<script>
-    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-    var toastList = toastElList.map(function (toastEl) {
-        return new bootstrap.Toast(toastEl)
-    })
-    toastList.forEach(toast => toast.show())
-</script>
+    <script>
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show())
+    </script>
 @endif
