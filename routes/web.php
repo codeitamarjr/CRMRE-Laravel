@@ -119,3 +119,9 @@ Route::get('/applications/create', [ApplicationsController::class, 'create'])->m
 Route::post('/applications', [ApplicationsController::class, 'store'])->middleware('auth');
 // Show Single Application
 Route::get('/applications/{application}', [ApplicationsController::class, 'show'])->middleware('auth');
+// Edit Application
+Route::get('/applications/{application}/edit', [ApplicationsController::class, 'edit'])->middleware('auth');
+// Update Application
+Route::put('/applications/{application}', [ApplicationsController::class, 'update'])->middleware('auth');
+// Delete Application
+Route::delete('/applications/{application}', [ApplicationsController::class, 'destroy'])->middleware('auth');
