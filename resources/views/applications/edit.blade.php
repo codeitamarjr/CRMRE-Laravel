@@ -410,6 +410,7 @@
                                                     </div>
                                                 </div>
                                                 <ul class="list-inline">
+                                                    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
                                                     <button type="submit" class="btn btn-primary float-end">Save</button>
                                                 </ul>
                                             </div>
