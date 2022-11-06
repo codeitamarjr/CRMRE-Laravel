@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            // prs_code is primary and foreign key from prs table
-
             $table->string('prs_code')->references('prs_code')->on('prs');
             $table->string('client_code')->unique();
             $table->string('name');

@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'prs_code',
         'name',
+        'surname',
+        'username',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -41,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //  Relationship to Enquiries
+    public function enquiries(){
+        return $this->hasMany(Enquiries::class, 'prs_code');
+    }
 }

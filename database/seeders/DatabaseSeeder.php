@@ -7,9 +7,10 @@ namespace Database\Seeders;
 use App\Models\PRS;
 use App\Models\User;
 use App\Models\Client;
-use App\Models\Applications;
+use App\Models\Clients;
 use App\Models\Enquiries;
 use App\Models\Properties;
+use App\Models\Applications;
 use App\Models\EmailSetting;
 use Illuminate\Database\Seeder;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -27,11 +28,12 @@ class DatabaseSeeder extends Seeder
 
         PRS::factory(3)->create();
         
-        Client::factory(3)->create();
+        Clients::factory(2)->create();
 
-        Properties::factory(10)->create();
+        Properties::factory(3)->create();
         
         EmailSetting::create([
+            'prs_code' => 'PRS1',
             'email_code' => 'EMAIL0001',
             'service_provider' => 'G Demo Provider',
             'service_name' => 'Gmail',
@@ -66,6 +68,5 @@ class DatabaseSeeder extends Seeder
 
         Applications::factory(10000)->create();
 
-        \App\Models\Listing::factory(10)->create();
     }
 }

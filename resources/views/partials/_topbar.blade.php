@@ -67,8 +67,7 @@
                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                         <h6 class="dropdown-header">alerts center</h6><a
                             class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                    src="assets/img/avatars/avatar4.jpeg">
+                            <div class="dropdown-list-image me-3"><img class="rounded-circle" >
                                 <div class="bg-success status-indicator"></div>
                             </div>
                             <div class="fw-bold">
@@ -77,8 +76,7 @@
                                 <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
                             </div>
                         </a><a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                    src="assets/img/avatars/avatar2.jpeg">
+                            <div class="dropdown-list-image me-3"><img class="rounded-circle" >
                                 <div class="status-indicator"></div>
                             </div>
                             <div class="fw-bold">
@@ -87,8 +85,7 @@
                                 <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
                             </div>
                         </a><a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                    src="assets/img/avatars/avatar3.jpeg">
+                            <div class="dropdown-list-image me-3"><img class="rounded-circle" >
                                 <div class="bg-warning status-indicator"></div>
                             </div>
                             <div class="fw-bold">
@@ -98,8 +95,7 @@
                                 <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
                             </div>
                         </a><a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                    src="assets/img/avatars/avatar5.jpeg">
+                            <div class="dropdown-list-image me-3"><img class="rounded-circle" >
                                 <div class="bg-success status-indicator"></div>
                             </div>
                             <div class="fw-bold">
@@ -119,16 +115,26 @@
             <li class="nav-item dropdown no-arrow">
                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                         aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
-                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
+                            class="d-none d-lg-inline me-2 text-gray-600 small">{{auth()->user()->name}} {{auth()->user()->surname}}</span><img
                             class="border rounded-circle img-profile"
-                            src="assets/img/avatars/avatar1.jpeg"></a>
+                            src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('img/avatars/noavatar.webp') }}"></a>
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                        <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
+                        <a class="dropdown-item" href="/users/edit"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                         <a class="dropdown-item" href="/register"><i class="fas fa-user-plus fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Register New User</a>
+                        <a class="dropdown-item" href="/clients"><i class="fas fa-briefcase fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Clients</a>
+                        <a class="dropdown-item" href="/properties"><i class="fas fa-building fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Properties</a>
+                        <a class="dropdown-item" href="/units"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Units</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
+                                Logout
+                            </button>
+                        </form>
+                        </a>
                     </div>
                 </div>
             </li>
