@@ -22,10 +22,13 @@ class Clients extends Model
         'client_code',
     ];
 
-    /**
-     * Get the properties for the client.
-     * (one client to many properties) where the client_code is the foreign key
-     */
+    // Many clients belong to one PRS
+    public function prs()
+    {
+        return $this->belongsTo(PRS::class, 'prs_code', 'prs_code');
+    }
+
+    // One client has many properties
     public function properties()
     {
         return $this->hasMany(Properties::class, 'client_code', 'client_code');

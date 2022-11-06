@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends Controller
 {
     // Show all clients
     public function index()
     {
-        $clients = Clients::all();
+        $clients = Auth::user()->prs->clients;
         return view('clients.index', [
             'heading' => 'Clients',
             'clients' => $clients
@@ -35,11 +35,13 @@ class ClientsController extends Controller
         }
         return view('clients.edit', [
             'heading' => 'Edit Client',
-            'client' => $client]);
+            'client' => $client
+        ]);
     }
 
     // Store Client Data
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -75,11 +77,12 @@ class ClientsController extends Controller
         ]);
 
         $client->update($data);
-        return redirect('/clients/'.$client->id.'/edit')->with('message', 'Client Updated Successfully');
+        return redirect('/clients/' . $client->id . '/edit')->with('message', 'Client Updated Successfully');
     }
 
     // Update Clients Logo
-    public function updateLogo(Request $client){
+    public function updateLogo(Request $client)
+    {
         $data = $client->validate([
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

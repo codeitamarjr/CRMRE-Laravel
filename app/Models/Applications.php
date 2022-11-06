@@ -60,4 +60,10 @@ class Applications extends Model
                 ->orWhere('applications.employment_sector', 'like', '%' . $filters['search'] . '%');
         }
     }
+
+    // Relationship to PRS (one to one)
+    public function prs()
+    {
+        return $this->belongsTo(PRS::class, 'prs_code', 'prs_code');
+    }
 }

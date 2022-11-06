@@ -10,7 +10,7 @@ class Enquiries extends Model
     use HasFactory;
 
     protected $fillable = [
-        'email_code' ,
+        'email_code',
         'enquiry_id',
         'prs_code',
         'property_code',
@@ -22,18 +22,20 @@ class Enquiries extends Model
         'status',
     ];
 
-    public function scopeFilter($query, array $filters){
-        if($filters['search'] ?? false){
-            $query->where('contact_name', 'like', '%'.$filters['search'].'%')
-            ->orWhere('contact_email', 'like', '%'.$filters['search'].'%')
-            ->orWhere('contact_phone', 'like', '%'.$filters['search'].'%')
-            ->orWhere('title', 'like', '%'.$filters['search'].'%')
-            ->orWhere('body', 'like', '%'.$filters['search'].'%');
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query->where('contact_name', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('contact_email', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('contact_phone', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('title', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('body', 'like', '%' . $filters['search'] . '%');
         }
     }
 
-    // Relationship to User
-    public function user(){
-        return $this->belongsTo(User::class, 'prs_code');
+    // Relationship to PRS
+    public function prs()
+    {
+        return $this->belongsTo(PRS::class, 'prs_code', 'prs_code');
     }
 }
