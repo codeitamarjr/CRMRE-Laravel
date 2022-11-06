@@ -46,8 +46,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //  Relationship to Enquiries
-    public function enquiries(){
-        return $this->hasMany(Enquiries::class, 'prs_code');
+    // One user belongs to ONE PRS
+    public function prs()
+    {
+        return $this->belongsTo(PRS::class, 'prs_code', 'prs_code');
+    }
+
+    //  Relationship to Enquiries( One user can have many enquiries)
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiries::class, 'prs_code', 'prs_code');
     }
 }

@@ -26,4 +26,10 @@ class Units extends Model
         'created_at',
         'updated_at',
     ];
+
+    // Many units belong to one property
+    public function property()
+    {
+        return $this->belongsTo(Properties::class, 'property_code', 'property_code');
+    }
 }

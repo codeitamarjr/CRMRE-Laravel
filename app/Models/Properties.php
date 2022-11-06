@@ -27,11 +27,15 @@ class Properties extends Model
         'property_code',
     ];
 
-    /**
-     * Get the client that owns the property.
-     * (many properties to one client) where the client_code is the foreign key 
-     */
-    public function client(){
+    // Many properties belong to one client
+    public function client()
+    {
         return $this->belongsTo(Clients::class, 'client_code', 'client_code');
+    }
+
+    // One property has many units
+    public function units()
+    {
+        return $this->hasMany(Units::class, 'property_code', 'property_code');
     }
 }
