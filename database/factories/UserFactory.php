@@ -18,7 +18,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'prs_code' => 'PRS' . $this->faker->numberBetween(0001, 3),
+            'prs_code' => 'PRS' . $this->faker->numberBetween(1, 3),
             'name' => fake()->name(),
             'surname' => fake()->lastName(),
             'username' => fake()->userName(),

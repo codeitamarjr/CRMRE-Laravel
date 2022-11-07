@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('prs_code')->references('prs_code')->on('prs');
+            $table->string('prs_code');
             $table->string('client_code')->unique();
             $table->string('name');
             $table->string('phone');
@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('country');
             $table->string('website');
             $table->string('logo')->nullable();
+
+            $table->foreign('prs_code')->references('prs_code')->on('prs')->onDelete('cascade');
         });
     }
 
