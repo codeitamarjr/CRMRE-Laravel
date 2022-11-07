@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\PRS;
 use App\Models\User;
+use App\Models\Units;
 use App\Models\Client;
 use App\Models\Clients;
 use App\Models\Enquiries;
@@ -24,14 +25,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        PRS::factory(3)->create();
+
         User::factory(10)->create();
 
-        PRS::factory(3)->create();
-        
         Clients::factory(2)->create();
 
         Properties::factory(3)->create();
-        
+
+        Units::factory(50)->create();
+
         EmailSetting::create([
             'prs_code' => 'PRS1',
             'email_code' => 'EMAIL0001',
@@ -49,24 +52,8 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
         ]);
 
-        Enquiries::factory(10000)->create();
-
-        // Enquiries::create([
-        //     'email_code' => 'EMAIL0001',
-        //     'enquiry_id' => 'ENQ0001',
-        //     'prs_code' => 'PRS0001',
-        //     'property_code' => 'PRP0001',
-        //     'email' => 'mail@example.com',
-        //     'title' => 'Enquiry Title',
-        //     'date' => '2021-10-10',
-        //     'body' => 'Enquiry Body',
-        //     'contact_phone' => '123456789',
-        //     'contact_name' => 'Contact Name',
-        //     'contact_email' => 'contact@mail.com',
-        //     'status' => 'New',
-        // ]);
-
         Applications::factory(10000)->create();
 
+        Enquiries::factory(10000)->create();
     }
 }

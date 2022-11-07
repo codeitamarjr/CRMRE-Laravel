@@ -25,9 +25,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('website');
             $table->string('logo')->nullable();
-            // $table->foreign('prs_code')->references('prs_code')->on('users')->onDelete('cascade');
-            // $table->foreign('prs_code')->references('prs_code')->on('clients')->onDelete('cascade');
-            // $table->foreign('prs_code')->references('prs_code')->on('enquiries')->onDelete('cascade');
         });
     }
 

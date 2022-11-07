@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('property_code')->unique();
-            $table->string('client_code')->references('client_code')->on('clients')->onDelete('cascade');
+            $table->string('slug')->unique()->nullable();
+            $table->string('client_code');
             $table->string('type'); // Apartment, House, Land, Commercial
             $table->string('status'); // For Sale, For Rent, Sold, Rented
             $table->string('name');
@@ -30,6 +31,8 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('description');
             $table->string('email_code');
+
+            $table->foreign('client_code')->references('client_code')->on('clients')->onDelete('cascade');
         });
     }
 

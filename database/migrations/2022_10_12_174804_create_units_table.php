@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('property_code')->references('property_code')->on('property');
+            $table->string('property_code');
             $table->string('unit_code')->unique();
             $table->string('custom_code')->nullable();
             $table->string('name')->nullable();
@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->date('date_available');
             $table->string('status');
+
+            $table->foreign('property_code')->references('property_code')->on('properties')->onDelete('cascade');
         });
     }
 
