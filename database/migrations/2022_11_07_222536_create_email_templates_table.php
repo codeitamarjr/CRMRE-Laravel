@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('subject');
             $table->longText('body');
+            $table->tinyInteger('SYSTEM')->default(0); // Enable/Disable System Email Template
+            $table->tinyInteger('ENQ')->default(0); // Enable/Disable templat at Enquiries action
+            $table->tinyInteger('APP')->default(0); // Enable/Disable templat at Applications action
+            $table->tinyInteger('TEN')->default(0); // Enable/Disable templat at Tenancies action
 
             $table->foreign('prs_code')->references('prs_code')->on('prs')->onDelete('cascade');
             $table->foreign('property_code')->references('property_code')->on('properties')->onDelete('cascade');

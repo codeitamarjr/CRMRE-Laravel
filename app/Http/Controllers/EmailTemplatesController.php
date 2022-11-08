@@ -36,7 +36,16 @@ class EmailTemplatesController extends Controller
             'name' => 'required',
             'subject' => 'required',
             'body' => 'required',
+            'SYSTEM' => 'nullable',
+            'ENQ' => 'nullable',
+            'APP' => 'nullable',
+            'TEN' => 'nullable',
         ]);
+
+        empty($data['SYSTEM']) ? $data['SYSTEM'] = 0 : $data['SYSTEM'] = 1;
+        empty($data['ENQ']) ? $data['ENQ'] = 0 : $data['ENQ'] = 1;
+        empty($data['APP']) ? $data['APP'] = 0 : $data['APP'] = 1;
+        empty($data['TEN']) ? $data['TEN'] = 0 : $data['TEN'] = 1;
 
         $data['prs_code'] = auth()->user()->prs_code;
 
@@ -60,7 +69,16 @@ class EmailTemplatesController extends Controller
             'name' => 'required',
             'subject' => 'required',
             'body' => 'required',
+            'SYSTEM' => 'nullable',
+            'ENQ' => 'nullable',
+            'APP' => 'nullable',
+            'TEN' => 'nullable',
         ]);
+
+        empty($data['SYSTEM']) ? $data['SYSTEM'] = 0 : $data['SYSTEM'] = 1;
+        empty($data['ENQ']) ? $data['ENQ'] = 0 : $data['ENQ'] = 1;
+        empty($data['APP']) ? $data['APP'] = 0 : $data['APP'] = 1;
+        empty($data['TEN']) ? $data['TEN'] = 0 : $data['TEN'] = 1;
 
         $email_templates->update($data);
         return redirect('/email-templates')->with('success', 'Email Template Updated Successfully');

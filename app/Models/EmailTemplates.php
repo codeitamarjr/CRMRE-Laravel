@@ -15,6 +15,10 @@ class EmailTemplates extends Model
         'name',
         'subject',
         'body',
+        'SYSTEM',
+        'ENQ',
+        'APP',
+        'TEN',
     ];
 
     // Relationship with PRS by (prs_code)
