@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiriesController;
 use App\Http\Controllers\PropertiesController;
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\EmailTemplatesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,3 +126,18 @@ Route::get('/applications/{application}/edit', [ApplicationsController::class, '
 Route::put('/applications/{application}', [ApplicationsController::class, 'update'])->middleware('auth');
 // Delete Application
 Route::delete('/applications/{application}', [ApplicationsController::class, 'destroy'])->middleware('auth');
+
+// Index Email Templates
+Route::get('/email-templates', [EmailTemplatesController::class, 'index'])->middleware('auth');
+// Create Email Template
+Route::get('/email-templates/create', [EmailTemplatesController::class, 'create'])->middleware('auth');
+// Store Email Template
+Route::post('/email-templates', [EmailTemplatesController::class, 'store'])->middleware('auth');
+// Edit Email Template
+Route::get('/email-templates/{email_templates}/edit', [EmailTemplatesController::class, 'edit'])->middleware('auth');
+// Update Email Template
+Route::put('/email-templates/{email_templates}', [EmailTemplatesController::class, 'update'])->middleware('auth');
+// Show Single Email Template
+Route::get('/email-templates/{email_templates}', [EmailTemplatesController::class, 'show'])->middleware('auth');
+// Delete Email Template
+Route::delete('/email-templates/{email_templates}', [EmailTemplatesController::class, 'destroy'])->middleware('auth');
