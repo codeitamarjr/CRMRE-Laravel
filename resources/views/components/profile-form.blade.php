@@ -1,10 +1,10 @@
-@props(['application'])
+@props(['profile'])
 
 {{-- Load TinyMCE --}}
 <script src="https://cdn.tiny.cloud/1/wqh1zddiefonsyraeh8x3jwdkrswjtgv49fuarkvu1ggr9ad/tinymce/6/tinymce.min.js"
     referrerpolicy="origin"></script>
 
-<form method="POST" action="/applications">
+<form method="POST" action="/profiles">
     @csrf
     <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center h-100">

@@ -11,7 +11,7 @@ use App\Models\Client;
 use App\Models\Clients;
 use App\Models\Enquiries;
 use App\Models\Properties;
-use App\Models\Applications;
+use App\Models\Profiles;
 use App\Models\EmailSetting;
 use Illuminate\Database\Seeder;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
         ]);
 
-        Applications::factory(10000)->create();
+        Profiles::factory(10000)->create();
 
         Enquiries::factory(10000)->create();
     }

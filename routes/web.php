@@ -11,7 +11,7 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiriesController;
 use App\Http\Controllers\PropertiesController;
-use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\EmailTemplatesController;
 
 /*
@@ -112,20 +112,20 @@ Route::put('/units/{unit}', [UnitsController::class, 'update'])->middleware('aut
 // Delete Unit
 Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware('auth');
 
-// Show All Applications
-Route::get('/applications', [ApplicationsController::class, 'index'])->middleware('auth');
+// Show All Profiles
+Route::get('/profiles', [ProfilesController::class, 'index'])->middleware('auth');
 // Create Application
-Route::get('/applications/create', [ApplicationsController::class, 'create'])->middleware('auth');
+Route::get('/profiles/create', [ProfilesController::class, 'create'])->middleware('auth');
 // Store Application Data
-Route::post('/applications', [ApplicationsController::class, 'store'])->middleware('auth');
+Route::post('/profiles', [ProfilesController::class, 'store'])->middleware('auth');
 // Show Single Application
-Route::get('/applications/{application}', [ApplicationsController::class, 'show'])->middleware('auth');
+Route::get('/profiles/{application}', [ProfilesController::class, 'show'])->middleware('auth');
 // Edit Application
-Route::get('/applications/{application}/edit', [ApplicationsController::class, 'edit'])->middleware('auth');
+Route::get('/profiles/{application}/edit', [ProfilesController::class, 'edit'])->middleware('auth');
 // Update Application
-Route::put('/applications/{application}', [ApplicationsController::class, 'update'])->middleware('auth');
+Route::put('/profiles/{application}', [ProfilesController::class, 'update'])->middleware('auth');
 // Delete Application
-Route::delete('/applications/{application}', [ApplicationsController::class, 'destroy'])->middleware('auth');
+Route::delete('/profiles/{application}', [ProfilesController::class, 'destroy'])->middleware('auth');
 
 // Index Email Templates
 Route::get('/email-templates', [EmailTemplatesController::class, 'index'])->middleware('auth');

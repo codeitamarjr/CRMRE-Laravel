@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Applications extends Model
+class Profiles extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'application_id',
+        'profile_id',
         'prs_code',
         'property_code',
         'type',
@@ -53,11 +53,11 @@ class Applications extends Model
     public function scopeFilter($query, array $filters)
     {
         if ($filters['search'] ?? false) {
-            $query->where('applications.name', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('applications.surname', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('applications.email', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('applications.phone', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('applications.employment_sector', 'like', '%' . $filters['search'] . '%');
+            $query->where('Profiles.name', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('Profiles.surname', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('Profiles.email', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('Profiles.phone', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('Profiles.employment_sector', 'like', '%' . $filters['search'] . '%');
         }
     }
 

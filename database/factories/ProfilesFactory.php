@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ApplicationsFactory extends Factory
+class ProfilesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class ApplicationsFactory extends Factory
     public function definition()
     {
         return [
-            'application_id' => 'AP' . $this->faker->unique()->numberBetween(),
+            'profile_id' => 'AP' . $this->faker->unique()->numberBetween(),
             'prs_code' => 'PRS' . $this->faker->numberBetween(1, 3),
             'property_code' => 'PROP' . $this->faker->numberBetween(1, 17),
             'type' => $this->faker->randomElement(['Main', 'Joint', 'Guarantor']),

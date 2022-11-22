@@ -17,10 +17,11 @@
                                 </div>
                                 <p class="fs-6 fw-semibold mb-0">
                                     Source: Daft<br>
-                                    E-mail: mail@mail.com<br>
-                                    Phone: 00211031<br>
+                                    E-mail: {{ $profile['email'] }}<br>
+                                    Phone: {{ $profile['phone'] }}<br>
                                     Applicants:02<br>
-                                    John Doen(Joint)<br>
+                                    {{ $profile['name'] }} ( {{ $profile['employment_position'] }} at
+                                    {{ $profile['employment_company'] }} )<br>
                                     May Keen(Guarantor)
                                 </p>
                             </div>
@@ -33,6 +34,7 @@
             </div>
             <div class="col mb-4">
                 <div class="card border-start-success py-2 shadow">
+
                     <div class="card-body">
                         <div class="row align-items-center no-gutters">
                             <div class="col me-2">
@@ -41,9 +43,30 @@
                                 </div>
                                 <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
                             </div>
-                            <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                            <div class="col-auto">
+
+                                <div class="dropdown no-arrow">
+                                    <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
+                                        data-bs-toggle="dropdown" type="button">
+                                        <div class="btn btn-outline-primary"><i
+                                                class="fas fa-check text-success"></i>Evaluate
+                                        </div>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end animated--fade-in shadow" style="">
+                                        <p class="dropdown-header text-center">Outcome:</p>
+                                        <a class="dropdown-item" href="#">&nbsp;Approve</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">&nbsp;Deny</a>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="col mb-4">
@@ -89,13 +112,13 @@
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label" id="name">First Name</label>
                                                             <input type="text" class="form-control-plaintext"
-                                                                name="name" value="{{ $application['name'] }}"
+                                                                name="name" value="{{ $profile['name'] }}"
                                                                 id="name">
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label" id="surname">Last Name</label>
                                                             <input type="text" class="form-control-plaintext"
-                                                                name="surname" value="{{ $application['surname'] }}"
+                                                                name="surname" value="{{ $profile['surname'] }}"
                                                                 id="surname">
                                                         </div>
                                                     </div>
@@ -104,13 +127,13 @@
                                                             <label class="form-label" id="dob">Date of Birth</label>
                                                             <input type="date" id="dob"
                                                                 class="form-control-plaintext" name="dob"
-                                                                value="{{ $application['dob'] }}">
+                                                                value="{{ $profile['dob'] }}">
                                                         </div>
                                                         <div class="col">
                                                             <label class="form-label" id="pps_number">PPS Number</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 name="pps_number" id="pps_number"
-                                                                value="{{ $application['pps_number'] }}">
+                                                                value="{{ $profile['pps_number'] }}">
                                                             <span class="font-13 text-muted">e.g "xxxxxx-xx" or
                                                                 "InProgress"</span>
                                                         </div>
@@ -118,7 +141,7 @@
                                                             <label class="form-label" id="phone">Phone Number</label>
                                                             <input type="number" class="form-control-plaintext"
                                                                 name="phone" id="phone"
-                                                                value="{{ $application['phone'] }}">
+                                                                value="{{ $profile['phone'] }}">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -127,7 +150,7 @@
                                                                 Address</label>
                                                             <input type="email" class="form-control-plaintext"
                                                                 name="email" id="email"
-                                                                value="{{ $application['email'] }}">
+                                                                value="{{ $profile['email'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label" id="alternative_email">Alternative
@@ -135,7 +158,7 @@
                                                                 Address</label>
                                                             <input type="alternative_email" class="form-control-plaintext"
                                                                 name="alternative_email" id="alternative_email"
-                                                                value="{{ $application['alternative_email'] }}">
+                                                                value="{{ $profile['alternative_email'] }}">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -143,26 +166,26 @@
                                                             <label class="form-label" id="address">Full Address</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 name="address" id="address"
-                                                                value="{{ $application['address'] }}">
+                                                                value="{{ $profile['address'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label" id="city">City</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 name="city" id="city"
-                                                                value="{{ $application['city'] }}">
+                                                                value="{{ $profile['city'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label" id="country">Country</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 name="country" id="country"
-                                                                value="{{ $application['country'] }}">
+                                                                value="{{ $profile['country'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label" id="postcode">Postal Code</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 data-toggle="input-mask" data-mask-format="A00-AAAA"
                                                                 maxlength="7" name="postcode" id="postcode"
-                                                                value="{{ $application['postcode'] }}">
+                                                                value="{{ $profile['postcode'] }}">
                                                             <span class="font-13 text-muted">e.g "xxx-xxxx"</span><br>
                                                             <span class="font-13 text-muted">
                                                                 <a href="https://finder.eircode.ie/" target="_blank">Find
@@ -180,20 +203,20 @@
                                                             <input type="text" class="form-control-plaintext"
                                                                 maxlength="7" name="employment_status"
                                                                 id="employment_status"
-                                                                value="{{ $application['employment_status'] }}">
+                                                                value="{{ $profile['employment_status'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label"
                                                                 id="employment_sector">Sector</label>
                                                             <input type="text" class="form-control-plaintext"
-                                                                value="{{ $application['employment_sector'] }}">
+                                                                value="{{ $profile['employment_sector'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label"
                                                                 id="employment_position">Position</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 id="employment_position" name="employment_position"
-                                                                value="{{ $application['employment_position'] }}">
+                                                                value="{{ $profile['employment_position'] }}">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -202,20 +225,20 @@
                                                                 id="employment_company">Company</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 id="employment_company" name="employment_company"
-                                                                value="{{ $application['employment_company'] }}">
+                                                                value="{{ $profile['employment_company'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label" id="employment_phone">Phone</label>
                                                             <input type="number" class="form-control-plaintext"
                                                                 id="employment_phone" name="employment_phone"
-                                                                value="{{ $application['employment_phone'] }}">
+                                                                value="{{ $profile['employment_phone'] }}">
                                                         </div>
                                                         <div class="col mb-3">
                                                             <label class="form-label" id="employment_start_date">Start
                                                                 Date</label>
                                                             <input type="date" class="form-control-plaintext"
                                                                 id="employment_start_date" name="employment_start_date"
-                                                                value="{{ $application['employment_start_date'] }}">
+                                                                value="{{ $profile['employment_start_date'] }}">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -223,7 +246,7 @@
                                                             <label class="form-label" id="income">Income</label>
                                                             <input type="number" class="form-control-plaintext"
                                                                 id="income" name="income"
-                                                                value="{{ $application['income'] }}">
+                                                                value="{{ $profile['income'] }}">
                                                             <span class="font-13 text-muted">Monthly Income</span>
                                                         </div>
                                                         <div class="col mb-3">
@@ -231,7 +254,7 @@
                                                                 Income</label>
                                                             <input type="number" class="form-control-plaintext"
                                                                 id="extra_income" name="extra_income"
-                                                                value="{{ $application['extra_income'] }}">
+                                                                value="{{ $profile['extra_income'] }}">
                                                             <span class="font-13 text-muted">Monthly Income</span>
                                                         </div>
                                                         <div class="col mb-3">
@@ -240,7 +263,7 @@
                                                                 Details</label>
                                                             <input type="text" class="form-control-plaintext"
                                                                 id="extra_income_source" name="extra_income_source"
-                                                                value="{{ $application['extra_income_source'] }}">
+                                                                value="{{ $profile['extra_income_source'] }}">
                                                         </div>
 
                                                         <h4 class="mb-3">Aditional Information</h4>
@@ -250,14 +273,14 @@
                                                                     Name</label>
                                                                 <input type="text" class="form-control-plaintext"
                                                                     id="landlord_name" name="landlord_name"
-                                                                    value="{{ $application['landlord_name'] }}">
+                                                                    value="{{ $profile['landlord_name'] }}">
                                                             </div>
                                                             <div class="col mb-2">
                                                                 <label class="form-label" id="landlord_phone">Landlord
                                                                     Phone</label>
                                                                 <input type="number" class="form-control-plaintext"
                                                                     id="landlord_phone" name="landlord_phone"
-                                                                    value="{{ $application['landlord_phone'] }}">
+                                                                    value="{{ $profile['landlord_phone'] }}">
                                                             </div>
                                                             <div class="col mb-3">
                                                                 <label class="form-label"
@@ -267,7 +290,7 @@
                                                                 <input type="date" class="form-control-plaintext"
                                                                     id="preferred_move_out_date"
                                                                     name="preferred_move_out_date"
-                                                                    value="{{ $application['preferred_move_out_date'] }}">
+                                                                    value="{{ $profile['preferred_move_out_date'] }}">
                                                             </div>
                                                         </div>
 
@@ -277,30 +300,30 @@
                                                             <div class="col-md-3 mb-3">
                                                                 <label class="form-label" id="children">Children</label>
                                                                 <input type="number" class="form-control-plaintext"
-                                                                    value="{{ $application['children'] }}">
+                                                                    value="{{ $profile['children'] }}">
                                                             </div>
                                                             <div class="col-md-3 mb-2">
                                                                 <label class="form-label" id="children_age">Children
                                                                     Age</label>
                                                                 <input type="number" class="form-control-plaintext"
                                                                     id="children_age" name="children_age"
-                                                                    value="{{ $application['children_age'] }}">
+                                                                    value="{{ $profile['children_age'] }}">
                                                             </div>
                                                             <div class="col-md-3 mb-3">
                                                                 <label class="form-label" id="car">Car</label>
                                                                 <input type="text" class="form-control-plaintext"
-                                                                    value="{{ $application['car'] }}">
+                                                                    value="{{ $profile['car'] }}">
                                                             </div>
                                                             <div class="col-md-3 mb-3">
                                                                 <label class="form-label" id="pet">Pet</label>
                                                                 <input type="text" class="form-control-plaintext"
-                                                                    value="{{ $application['pet'] }}">
+                                                                    value="{{ $profile['pet'] }}">
                                                             </div>
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="form-label" id="pet_breed">Breed</label>
                                                                 <input type="text" class="form-control-plaintext"
                                                                     id="pet_breed" name="pet_breed"
-                                                                    value="{{ $application['pet_breed'] }}">
+                                                                    value="{{ $profile['pet_breed'] }}">
                                                             </div>
                                                         </div>
 
@@ -310,14 +333,14 @@
                                                             <div class="col">
                                                                 <label class="form-label" id="HAP">HAP</label>
                                                                 <input type="text" class="form-control-plaintext"
-                                                                    value="{{ $application['HAP'] }}">
+                                                                    value="{{ $profile['HAP'] }}">
                                                             </div>
                                                             <div class="col mb-3">
                                                                 <label class="form-label" id="HAP_allowance">HAP
                                                                     Allowance</label>
                                                                 <input type="number" class="form-control-plaintext"
                                                                     id="HAP_allowance" name="HAP_allowance"
-                                                                    value="{{ $application['HAP_allowance'] }}">
+                                                                    value="{{ $profile['HAP_allowance'] }}">
                                                             </div>
                                                         </div>
 
@@ -355,7 +378,7 @@
                                                             </div>
                                                             <div class="col mb-3">
                                                                 <label class="form-label">Notes</label>
-                                                                <textarea class="form-control-plaintext" id="tinyTextArea" rows="5" name="notes" maxlength="255">{{ $application['notes'] }}</textarea>
+                                                                <textarea class="form-control-plaintext" id="tinyTextArea" rows="5" name="notes" maxlength="255">{{ $profile['notes'] }}</textarea>
                                                             </div>
                                                         </div>
                                                         <ul class="list-inline">

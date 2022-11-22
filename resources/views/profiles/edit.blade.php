@@ -9,7 +9,7 @@
                     <script src="https://cdn.tiny.cloud/1/wqh1zddiefonsyraeh8x3jwdkrswjtgv49fuarkvu1ggr9ad/tinymce/6/tinymce.min.js"
                         referrerpolicy="origin"></script>
 
-                    <form method="POST" action="/applications/{{ $application->id }}">
+                    <form method="POST" action="/profiles/{{ $profile->id }}">
                         @csrf
                         @method('PUT')
                         <div class="container-fluid">
@@ -23,7 +23,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label" id="name">First Name</label>
                                                     <input type="text" class="form-control" name="name"
-                                                        value="{{ $application['name'] }}" id="name">
+                                                        value="{{ $profile['name'] }}" id="name">
                                                     @error('name')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -31,7 +31,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label" id="surname">Last Name</label>
                                                     <input type="text" class="form-control" name="surname"
-                                                        value="{{ $application['surname'] }}" id="surname">
+                                                        value="{{ $profile['surname'] }}" id="surname">
                                                     @error('surname')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -41,7 +41,7 @@
                                                 <div class="col mb-3">
                                                     <label class="form-label" id="dob">Date of Birth</label>
                                                     <input type="date" id="dob" class="form-control" name="dob"
-                                                        value="{{ $application['dob'] }}">
+                                                        value="{{ $profile['dob'] }}">
                                                     @error('dob')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -49,7 +49,7 @@
                                                 <div class="col">
                                                     <label class="form-label" id="pps_number">PPS Number</label>
                                                     <input type="text" class="form-control" name="pps_number"
-                                                        id="pps_number" value="{{ $application['pps_number'] }}">
+                                                        id="pps_number" value="{{ $profile['pps_number'] }}">
                                                     @error('pps_number')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -58,7 +58,7 @@
                                                 <div class="col">
                                                     <label class="form-label" id="phone">Phone Number</label>
                                                     <input type="number" class="form-control" name="phone" id="phone"
-                                                        value="{{ $application['phone'] }}">
+                                                        value="{{ $profile['phone'] }}">
                                                     @error('phone')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -68,7 +68,7 @@
                                                 <div class="col mb-3">
                                                     <label class="form-label" id="email">E-mail Address</label>
                                                     <input type="email" class="form-control" name="email" id="email"
-                                                        value="{{ $application['email'] }}">
+                                                        value="{{ $profile['email'] }}">
                                                     @error('email')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -78,7 +78,7 @@
                                                         Address</label>
                                                     <input type="alternative_email" class="form-control"
                                                         name="alternative_email" id="alternative_email"
-                                                        value="{{ $application['alternative_email'] }}">
+                                                        value="{{ $profile['alternative_email'] }}">
                                                     @error('alternative_email')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -88,7 +88,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" id="address">Full Address</label>
                                                     <input type="text" class="form-control" name="address" id="address"
-                                                        value="{{ $application['address'] }}">
+                                                        value="{{ $profile['address'] }}">
                                                     @error('address')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -96,7 +96,7 @@
                                                 <div class="col mb-3">
                                                     <label class="form-label" id="city">City</label>
                                                     <input type="text" class="form-control" name="city" id="city"
-                                                        value="{{ $application['city'] }}">
+                                                        value="{{ $profile['city'] }}">
                                                     @error('city')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -104,7 +104,7 @@
                                                 <div class="col mb-3">
                                                     <label class="form-label" id="country">Country</label>
                                                     <input type="text" class="form-control" name="country"
-                                                        id="country" value="{{ $application['country'] }}">
+                                                        id="country" value="{{ $profile['country'] }}">
                                                     @error('country')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -113,7 +113,7 @@
                                                     <label class="form-label" id="postcode">Postal Code</label>
                                                     <input type="text" class="form-control" data-toggle="input-mask"
                                                         data-mask-format="A00-AAAA" maxlength="7" name="postcode"
-                                                        id="postcode" value="{{ $application['postcode'] }}">
+                                                        id="postcode" value="{{ $profile['postcode'] }}">
                                                     @error('postcode')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -133,8 +133,8 @@
                                                     <label class="form-label" id="employment_status">Status</label>
                                                     <select class="form-select" name="employment_status"
                                                         id="employment_status">
-                                                        <option value="{{ $application['employment_status'] }}">
-                                                            {{ $application['employment_status'] ? $application['employment_status'] : 'Select' }}
+                                                        <option value="{{ $profile['employment_status'] }}">
+                                                            {{ $profile['employment_status'] ? $profile['employment_status'] : 'Select' }}
                                                         </option>
                                                         <option value="Employed">Employed</option>
                                                         <option value="Unemployed">Unemployed</option>
@@ -151,8 +151,8 @@
                                                     <select class="form-select" name="employment_sector"
                                                         id="employment_sector">
                                                         {{-- 'Accounting', 'Banking', 'Construction', 'Education', 'Engineering', 'Finance', 'Healthcare', 'Hospitality', 'IT', 'Legal', 'Manufacturing', 'Marketing', 'Media', 'Property', 'Retail', 'Sales', 'Science', 'Transport', 'Other' --}}
-                                                        <option value="{{ $application['employment_sector'] }}">
-                                                            {{ $application['employment_sector'] ? $application['employment_sector'] : 'Select' }}
+                                                        <option value="{{ $profile['employment_sector'] }}">
+                                                            {{ $profile['employment_sector'] ? $profile['employment_sector'] : 'Select' }}
                                                         </option>
                                                         <option value="Accounting">Accounting</option>
                                                         <option value="Banking">Banking</option>
@@ -182,7 +182,7 @@
                                                     <label class="form-label" id="employment_position">Position</label>
                                                     <input type="text" class="form-control" id="employment_position"
                                                         name="employment_position"
-                                                        value="{{ $application['employment_position'] }}">
+                                                        value="{{ $profile['employment_position'] }}">
                                                     @error('employment_position')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -193,7 +193,7 @@
                                                     <label class="form-label" id="employment_company">Company</label>
                                                     <input type="text" class="form-control" id="employment_company"
                                                         name="employment_company"
-                                                        value="{{ $application['employment_company'] }}">
+                                                        value="{{ $profile['employment_company'] }}">
                                                     @error('employment_company')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -202,7 +202,7 @@
                                                     <label class="form-label" id="employment_phone">Phone</label>
                                                     <input type="number" class="form-control" id="employment_phone"
                                                         name="employment_phone"
-                                                        value="{{ $application['employment_phone'] }}">
+                                                        value="{{ $profile['employment_phone'] }}">
                                                     @error('employment_phone')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -212,7 +212,7 @@
                                                         Date</label>
                                                     <input type="date" class="form-control" id="employment_start_date"
                                                         name="employment_start_date"
-                                                        value="{{ $application['employment_start_date'] }}">
+                                                        value="{{ $profile['employment_start_date'] }}">
                                                     @error('employment_start_date')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -222,7 +222,7 @@
                                                 <div class="col mb-3">
                                                     <label class="form-label" id="income">Income</label>
                                                     <input type="number" class="form-control" id="income"
-                                                        name="income" value="{{ $application['income'] }}">
+                                                        name="income" value="{{ $profile['income'] }}">
                                                     <span class="font-13 text-muted">Monthly Income</span>
                                                     @error('income')
                                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -231,7 +231,7 @@
                                                 <div class="col mb-3">
                                                     <label class="form-label" id="extra_income">Extra Income</label>
                                                     <input type="number" class="form-control" id="extra_income"
-                                                        name="extra_income" value="{{ $application['extra_income'] }}">
+                                                        name="extra_income" value="{{ $profile['extra_income'] }}">
                                                     <span class="font-13 text-muted">Monthly Income</span>
                                                     @error('extra_income')
                                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -242,7 +242,7 @@
                                                         Details</label>
                                                     <input type="text" class="form-control" id="extra_income_source"
                                                         name="extra_income_source"
-                                                        value="{{ $application['extra_income_source'] }}">
+                                                        value="{{ $profile['extra_income_source'] }}">
                                                     @error('extra_income_source')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -253,8 +253,7 @@
                                                     <div class="col mb-3">
                                                         <label class="form-label" id="landlord_name">Landlord Name</label>
                                                         <input type="text" class="form-control" id="landlord_name"
-                                                            name="landlord_name"
-                                                            value="{{ $application['landlord_name'] }}">
+                                                            name="landlord_name" value="{{ $profile['landlord_name'] }}">
                                                         @error('landlord_name')
                                                             <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
@@ -264,7 +263,7 @@
                                                             Phone</label>
                                                         <input type="number" class="form-control" id="landlord_phone"
                                                             name="landlord_phone"
-                                                            value="{{ $application['landlord_phone'] }}">
+                                                            value="{{ $profile['landlord_phone'] }}">
                                                         @error('landlord_phone')
                                                             <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
@@ -274,7 +273,7 @@
                                                             Date</label>
                                                         <input type="date" class="form-control"
                                                             id="preferred_move_out_date" name="preferred_move_out_date"
-                                                            value="{{ $application['preferred_move_out_date'] }}">
+                                                            value="{{ $profile['preferred_move_out_date'] }}">
                                                         @error('preferred_move_out_date')
                                                             <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
@@ -287,8 +286,8 @@
                                                     <div class="col-md-3 mb-3">
                                                         <label class="form-label" id="children">Children</label>
                                                         <select class="form-select" id="children" name="children">
-                                                            <option value="{{ $application['children'] }}">
-                                                                {{ $application['children'] != null ? $application['children'] : 'Select' }}
+                                                            <option value="{{ $profile['children'] }}">
+                                                                {{ $profile['children'] != null ? $profile['children'] : 'Select' }}
                                                             </option>
                                                             <option value="0">No</option>
                                                             <option value="1">Yes</option>
@@ -300,8 +299,7 @@
                                                     <div class="col-md-3 mb-2">
                                                         <label class="form-label" id="children_age">Children Age</label>
                                                         <input type="number" class="form-control" id="children_age"
-                                                            name="children_age"
-                                                            value="{{ $application['children_age'] }}">
+                                                            name="children_age" value="{{ $profile['children_age'] }}">
                                                         @error('children_age')
                                                             <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
@@ -309,8 +307,8 @@
                                                     <div class="col-md-3 mb-3">
                                                         <label class="form-label" id="car">Car</label>
                                                         <select class="form-select" id="car" name="car">
-                                                            <option value="{{ $application['car'] }}">
-                                                                {{ $application['car'] != null ? $application['car'] : 'Select' }}
+                                                            <option value="{{ $profile['car'] }}">
+                                                                {{ $profile['car'] != null ? $profile['car'] : 'Select' }}
                                                             </option>
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
@@ -322,8 +320,8 @@
                                                     <div class="col-md-3 mb-3">
                                                         <label class="form-label" id="pet">Pet</label>
                                                         <select class="form-select" id="pet" name="pet">
-                                                            <option value="{{ $application['pet'] }}">
-                                                                {{ $application['pet'] != null ? $application['pet'] : 'Select' }}
+                                                            <option value="{{ $profile['pet'] }}">
+                                                                {{ $profile['pet'] != null ? $profile['pet'] : 'Select' }}
                                                             </option>
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
@@ -335,7 +333,7 @@
                                                     <div class="col-md-4 mb-3">
                                                         <label class="form-label" id="pet_breed">Breed</label>
                                                         <input type="text" class="form-control" id="pet_breed"
-                                                            name="pet_breed" value="{{ $application['pet_breed'] }}">
+                                                            name="pet_breed" value="{{ $profile['pet_breed'] }}">
                                                         @error('pet_breed')
                                                             <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
@@ -348,8 +346,8 @@
                                                     <div class="col">
                                                         <label class="form-label" id="HAP">HAP</label>
                                                         <select class="form-select" id="HAP" name="HAP">
-                                                            <option value="{{ $application['HAP'] == '1' ? '1' : '0' }}">
-                                                                {{ $application['HAP'] == '1' ? 'Yes' : 'No' }}</option>
+                                                            <option value="{{ $profile['HAP'] == '1' ? '1' : '0' }}">
+                                                                {{ $profile['HAP'] == '1' ? 'Yes' : 'No' }}</option>
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
@@ -360,8 +358,7 @@
                                                     <div class="col mb-3">
                                                         <label class="form-label" id="HAP_allowance">HAP Allowance</label>
                                                         <input type="number" class="form-control" id="HAP_allowance"
-                                                            name="HAP_allowance"
-                                                            value="{{ $application['HAP_allowance'] }}">
+                                                            name="HAP_allowance" value="{{ $profile['HAP_allowance'] }}">
                                                         @error('HAP_allowance')
                                                             <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
@@ -384,7 +381,7 @@
                                                                 <input class="form-check-input" type="radio"
                                                                     id="inlineRadioWaitingList" value="Yes"
                                                                     name="waiting_list"
-                                                                    {{ $application['waiting_list'] == 'yes' ? 'checked' : '' }}>
+                                                                    {{ $profile['waiting_list'] == 'yes' ? 'checked' : '' }}>
                                                                 <label class="form-check-label"
                                                                     for="inlineRadioWaitingList1">Yes</label>
                                                             </div>
@@ -394,7 +391,7 @@
                                                                 <input class="form-check-input" type="radio"
                                                                     id="inlineRadioWaitingList" value="No"
                                                                     name="waiting_list"
-                                                                    {{ $application['waiting_list'] == 'yes' ? '' : 'checked' }}>
+                                                                    {{ $profile['waiting_list'] == 'yes' ? '' : 'checked' }}>
 
                                                                 <label class="form-check-label"
                                                                     for="inlineRadioWaitingList2">No</label>
@@ -406,7 +403,7 @@
                                                     </div>
                                                     <div class="col mb-3">
                                                         <label class="form-label">Notes</label>
-                                                        <textarea class="form-control" id="tinyTextArea" rows="5" name="notes" maxlength="255">{{ $application['notes'] }}</textarea>
+                                                        <textarea class="form-control" id="tinyTextArea" rows="5" name="notes" maxlength="255">{{ $profile['notes'] }}</textarea>
                                                     </div>
                                                 </div>
                                                 <ul class="list-inline">

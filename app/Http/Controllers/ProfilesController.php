@@ -2,37 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Applications;
-use Illuminate\Console\Application;
+use App\Models\Profiles;
+use Illuminate\Console\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ApplicationsController extends Controller
+class ProfilesController extends Controller
 {
-    // Show All Applications
+    // Show All Profiles
     public function index()
     {
-        return view('applications.index', [
-            'applications' => Applications::latest()
-                ->join('properties', 'applications.property_code', '=', 'properties.property_code')
-                ->where('applications.prs_code', '=', Auth::user()->prs_code)
-                ->select('applications.*', 'properties.name as property_name')
+        return view('profiles.index', [
+            'profiles' => Profiles::latest()
+                ->join('properties', 'profiles.property_code', '=', 'properties.property_code')
+                ->where('profiles.prs_code', '=', Auth::user()->prs_code)
+                ->select('profiles.*', 'properties.name as property_name')
                 ->limit(1000)
-                ->orderBy('applications.created_at', 'desc')
+                ->orderBy('profiles.created_at', 'desc')
                 ->filter(request(['search']))->get()
         ]);
     }
 
     // Show Application
-    public function show(Applications $application)
+    public function show(Profiles $profile)
     {
-        return view('applications.show', compact('application'));
+        return view('profiles.show', compact('profile'));
     }
 
     // Create Application
     public function create()
     {
-        return view('applications.create');
+        return view('profiles.create');
     }
 
     // Store Application
@@ -72,28 +72,28 @@ class ApplicationsController extends Controller
             'waiting_list' => 'required|string|max:5',
 
         ]);
-        $data['application_id'] = 'AP' . uniqid();
+        $data['profile_id'] = 'AP' . uniqid();
         (isset($data['prs_code'])) ? '' : $data['prs_code'] = auth()->user()->prs_code;
         (isset($data['property_code'])) ? '' : $data['property_code'] = 'MANUALINPUT';
         (isset($data['type'])) ? '' : $data['type'] = 'Main';
         $data['status'] = 'New';
         try {
-            $application = Applications::create($data);
-            return redirect('applications.show', $application);
+            $profile = Profiles::create($data);
+            return redirect('profiles.show', $profile);
         } catch (\Exception $e) {
-            return redirect('/applications')->with('error', 'Error Creating Application(This Email Address Already Exists)
-            Use the seach bar and transfer this application to the selected property' . $e->getMessage());
+            return redirect('/profiles')->with('error', 'Error Creating Application(This Email Address Already Exists)
+            Use the seach bar and transfer this profile to the selected property' . $e->getMessage());
         }
     }
 
     // Edit Application
-    public function edit(Applications $application)
+    public function edit(Profiles $profile)
     {
-        return view('applications.edit', compact('application'));
+        return view('profiles.edit', compact('profile'));
     }
 
     // Update Application
-    public function update(Request $request, Applications $application)
+    public function update(Request $request, Profiles $profile)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -128,14 +128,14 @@ class ApplicationsController extends Controller
             'notes' => 'nullable|string|max:255',
             'waiting_list' => 'required|string|max:5',
         ]);
-        $application->update($data);
-        return redirect('/applications')->with('success', 'Application Updated');
+        $profile->update($data);
+        return redirect('/profiles')->with('success', 'Application Updated');
     }
 
     // Delete Application
-    public function destroy(Applications $application)
+    public function destroy(Profiles $profile)
     {
-        $application->delete();
-        return redirect('/applications')->with('success', 'Application Deleted');
+        $profile->delete();
+        return redirect('/profiles')->with('success', 'Application Deleted');
     }
 }
