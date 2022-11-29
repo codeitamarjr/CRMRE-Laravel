@@ -1,4 +1,7 @@
 @extends('layout')
+@php
+    use App\Models\Properties;
+@endphp
 
 @section('content')
     {{-- Load TinyMCE --}}
@@ -29,7 +32,10 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h6 class="mb-0">Property</h6>
+                                            <h6 class="mb-0">Change Property from
+                                                {{ Properties::where('property_code', $enquiry->property_code)->first()->name }}
+                                                to:
+                                            </h6>
                                             {{-- HTML Select listing all clients --}}
                                             <x-select-properties />
                                         </div>
@@ -37,7 +43,7 @@
                                     <p></p>
                                     <div class="row">
                                         <div class="col">
-                                            <h6 class="mb-0">First Name</h6>
+                                            <h6 class="mb-0">Name</h6>
                                             <input type="text" class="form-control" name="contact_name"
                                                 value="{{ $enquiry->contact_name }}">
                                             @error('contact_name')

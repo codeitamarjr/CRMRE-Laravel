@@ -19,7 +19,7 @@ class ProfilesFactory extends Factory
         return [
             'profile_id' => 'AP' . $this->faker->unique()->numberBetween(),
             'prs_code' => 'PRS' . $this->faker->numberBetween(1, 3),
-            'property_code' => 'PROP' . $this->faker->numberBetween(1, 17),
+            'application_id' => 'AP' . $this->faker->numberBetween(1, 100),
             'type' => $this->faker->randomElement(['Main', 'Joint', 'Guarantor']),
             'name' => $this->faker->firstName(),
             'surname' => $this->faker->lastName(),

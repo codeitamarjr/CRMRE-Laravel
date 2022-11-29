@@ -57,4 +57,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Enquiries::class, 'prs_code', 'prs_code');
     }
+
+    //  Relationship to Applications( One user can have many applications)
+    public function applications()
+    {
+        return $this->hasMany(Applications::class, 'prs_code', 'prs_code');
+    }
+
+    //  Relationship to Profiles( One user can have many profiles)
+    public function profiles()
+    {
+        return $this->hasMany(Profiles::class, 'prs_code', 'prs_code');
+    }
 }

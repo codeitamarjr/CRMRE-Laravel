@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             //  prs_code is primary and foreign key from prs table
-            $table->string('prs_code')->references('prs_code')->on('prs');
+            $table->string('prs_code');
             $table->string('name');
             $table->string('surname');
             $table->string('username')->unique();
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('prs_code')->references('prs_code')->on('prs')->onDelete('cascade');
         });
     }
 

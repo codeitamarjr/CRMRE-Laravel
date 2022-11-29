@@ -15,6 +15,9 @@
             <li class="nav-item"><a class="nav-link {{ request()->is('profiles') ? 'active' : '' }}" href="/profiles">
                     <i class="fa-solid fa-id-card"></i><span>Profiles</span></a>
             </li>
+            <li class="nav-item"><a class="nav-link {{ request()->is('applications') ? 'active' : '' }}"
+                    href="/applications">
+                    <i class="fas fa-file-alt"></i><span>Applications</span></a>
             <li class="nav-item"><a class="nav-link {{ request()->is('email-templates') ? 'active' : '' }}"
                     href="/email-templates">
                     <i class="fa-solid fa-envelope-open-text"></i>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profiles;
-use Illuminate\Console\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,20 +12,16 @@ class ProfilesController extends Controller
     public function index()
     {
         return view('profiles.index', [
-            'profiles' => Profiles::latest()
-                ->join('properties', 'profiles.property_code', '=', 'properties.property_code')
-                ->where('profiles.prs_code', '=', Auth::user()->prs_code)
-                ->select('profiles.*', 'properties.name as property_name')
-                ->limit(1000)
-                ->orderBy('profiles.created_at', 'desc')
-                ->filter(request(['search']))->get()
+            'profiles' => Auth::user()->profiles->sortByDesc('created_at'),
         ]);
     }
 
     // Show Application
-    public function show(Profiles $profile)
+    public function show(profiles $profiles)
     {
-        return view('profiles.show', compact('profile'));
+        return view('profiles.show', [
+            'profile' => $profiles
+        ]);
     }
 
     // Create Application
@@ -73,8 +68,6 @@ class ProfilesController extends Controller
 
         ]);
         $data['profile_id'] = 'AP' . uniqid();
-        (isset($data['prs_code'])) ? '' : $data['prs_code'] = auth()->user()->prs_code;
-        (isset($data['property_code'])) ? '' : $data['property_code'] = 'MANUALINPUT';
         (isset($data['type'])) ? '' : $data['type'] = 'Main';
         $data['status'] = 'New';
         try {

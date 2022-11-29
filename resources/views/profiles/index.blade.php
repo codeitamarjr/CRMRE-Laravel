@@ -30,7 +30,6 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Property</th>
                             <th>Name</th>
                             <th>E-mail</th>
                             <th>Employement Sector</th>
@@ -48,7 +47,6 @@
                     <tfoot>
                         <tr>
                             <th></th>
-                            <th>Property</th>
                             <th>Name</th>
                             <th>E-mail</th>
                             <th>Employement Sector</th>

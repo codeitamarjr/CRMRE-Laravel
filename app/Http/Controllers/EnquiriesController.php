@@ -14,16 +14,7 @@ class EnquiriesController extends Controller
     public function index()
     {
         return view('enquiries.index', [
-            'heading' => 'Enquiries',
             'enquiries' => Auth::user()->enquiries->sortByDesc('created_at'),
-            // 'enquiries' => Enquiries::latest()
-            //     ->join('properties', 'enquiries.property_code', '=', 'properties.property_code')
-            //     ->where('enquiries.prs_code', '=', Auth::user()->prs_code)
-            //     ->select('enquiries.*', 'properties.name as property_name')
-            //     ->filter(request(['search']))
-            //     ->limit(1000)
-            //     ->orderBy('enquiries.created_at', 'desc')
-            //     ->get(),
         ]);
     }
 
@@ -31,7 +22,6 @@ class EnquiriesController extends Controller
     public function show(enquiries $enquiries)
     {
         return view('enquiries.show', [
-            'heading' => 'Enquiry',
             'enquiry' => $enquiries
         ]);
     }
@@ -39,9 +29,7 @@ class EnquiriesController extends Controller
     // Create Enquiry Form
     public function create()
     {
-        return view('enquiries.create', [
-            'heading' => 'Create Manual Enquiry'
-        ]);
+        return view('enquiries.create');
     }
 
     // Store Enquiry Data

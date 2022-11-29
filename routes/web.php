@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnitsController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiriesController;
 use App\Http\Controllers\PropertiesController;
-use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\ApplicationsController;
 use App\Http\Controllers\EmailTemplatesController;
 
 /*
@@ -141,3 +142,12 @@ Route::put('/email-templates/{email_templates}', [EmailTemplatesController::clas
 Route::get('/email-templates/{email_templates}', [EmailTemplatesController::class, 'show'])->middleware('auth');
 // Delete Email Template
 Route::delete('/email-templates/{email_templates}', [EmailTemplatesController::class, 'destroy'])->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| Applications Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/applications', [ApplicationsController::class, 'index'])->middleware('auth');
+Route::get('/applications/{application}', [ApplicationsController::class, 'show'])->middleware('auth');
+Route::delete('/applications/{application}', [ApplicationsController::class, 'destroy'])->middleware('auth');

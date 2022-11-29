@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('profile_id')->unique();
-            $table->string('prs_code')->references('prs_code')->on('prs');
-            $table->string('property_code')->references('property_code')->on('properties')->nullable();
+            $table->string('prs_code');
+            $table->string('application_id')->nullable();
             $table->set('type', ['Main', 'Joint', 'Guarantor']); // Main applicant, Joint applicant, Guarantor
             $table->string('main_applicant_id')->references('profiles_id')->on('profiles')->nullable(); // If type is Joint or Guarantor, this is the main applicant
             $table->string('name');
@@ -55,6 +55,8 @@ return new class extends Migration
             $table->longText('notes')->nullable();
             $table->set('waiting_list', ['yes', 'no'])->nullable();
             $table->set('status', ['New', 'In Progress', 'Approved', 'Declined', 'Cancelled', 'Withdrawn', 'Archived']); // New, In Progress, Approved, Declined, Cancelled, Withdrawn, Archived
+
+            $table->foreign('prs_code')->references('prs_code')->on('prs')->onDelete('cascade');
         });
     }
 

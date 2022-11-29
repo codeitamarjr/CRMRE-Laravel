@@ -2,7 +2,6 @@
 
 <tr>
     <td></td>
-    <td>{{ $profile->property_name }}</td>
     <td>{{ $profile->name }} {{ $profile->surname }}</td>
     <td>{{ $profile->email }}</td>
     <td>{{ $profile->employment_sector }}</td>

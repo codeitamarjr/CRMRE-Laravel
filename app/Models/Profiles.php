@@ -12,7 +12,6 @@ class Profiles extends Model
     protected $fillable = [
         'profile_id',
         'prs_code',
-        'property_code',
         'type',
         'main_applicant_id',
         'name',
@@ -61,9 +60,9 @@ class Profiles extends Model
         }
     }
 
-    // Relationship to PRS (one to one)
-    public function prs()
+    // Relationship to Applications
+    public function applications()
     {
-        return $this->belongsTo(PRS::class, 'prs_code', 'prs_code');
+        return $this->hasOne(Applications::class, 'application_id', 'application_id');
     }
 }

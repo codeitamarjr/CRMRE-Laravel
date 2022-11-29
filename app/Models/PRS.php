@@ -39,4 +39,10 @@ class PRS extends Model
     {
         return $this->hasMany(EmailTemplates::class, 'prs_code', 'prs_code');
     }
+
+    // One PRS has many applications
+    public function applications()
+    {
+        return $this->hasMany(Applications::class, 'prs_code', 'prs_code');
+    }
 }

@@ -1,29 +1,37 @@
 @extends('layout')
+@php
+    use App\Models\Properties;
+@endphp
 
 @section('content')
     {{-- Load TinyMCE --}}
     <script src="https://cdn.tiny.cloud/1/wqh1zddiefonsyraeh8x3jwdkrswjtgv49fuarkvu1ggr9ad/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
 
+
     <div class="container-fluid">
         {{-- Heading --}}
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
-            <h3 class="text-dark mb-0">{{ $heading }}</h3>
+            <h3 class="text-dark mb-0">View Enquiry</h3>
         </div>
         <div class="card mb-4 shadow">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h6 class="text-primary fw-bold m-0">Enquirie Details</h6>
+
                 <div class="dropdown no-arrow">
-                    <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown"
-                        type="button">
-                        <i class="fas fa-ellipsis-v text-gray-400"></i>
+                    <div class="btn-group">
+                        <form method="POST" action="/enquiries/{{ $enquiry->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <a class="btn btn-secondary btn-sm" href="/enquiries/{{ $enquiry->id }}/edit"><i
+                                    class="fa-solid fa-pencil"></i></a>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                    <button class="btn btn-primary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown"
+                        type="button"><i class="fa-solid fa-reply"></i> Auto-reply
                     </button>
                     <div class="dropdown-menu dropdown-menu-end animated--fade-in shadow">
-                        <h6 class="dropdown-header text-center">Change Status</h6>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changeProperty">&nbsp;Change
-                            Property</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">&nbsp;Delete</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal">&nbsp;Send Welcome
                             E-mail</a>
@@ -42,7 +50,7 @@
                                 <h6 class="mb-0">Property</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                {{ $enquiry['property_code'] }}
+                                {{ Properties::where('property_code', $enquiry->property_code)->first()->name }}
                             </div>
                         </div>
                         <hr>
@@ -100,7 +108,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="email-content">
-                                    <textarea class="form-control" rows="13" id="tinyTextArea">{{ $enquiry['body'] }}</textarea>
+                                    <textarea class="form-control" name="body" id="tinyTextArea" rows="13">
+                                        {{ $enquiry['body'] }}
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
@@ -114,12 +124,10 @@
     <script>
         tinymce.init({
             selector: '#tinyTextArea',
-            //toolbar_location: 'bottom',
             visual: false,
             menubar: false,
             statusbar: false,
-            height: 600,
-            noneditable_class: ‘uneditable ',
+            height: 300,
         });
     </script>
 @endsection
