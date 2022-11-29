@@ -20,46 +20,45 @@
         <div class="card shadow">
             <div class="card-header py-3">
                 <p class="text-primary fw-bold m-0">
-                    List of Enquiries
-                    {{-- Buttom to add enquiry --}}
-                    <a href="/enquiries/create" class="btn btn-primary btn-sm float-end">Add Enquiry</a>
+                    {{-- Buttom to add profile --}}
+                    <a href="/profiles/create" class="btn btn-primary btn-sm float-end">Add profile</a>
                 </p>
             </div>
             <div class="card-body">
-                {{-- Datatable enquiries --}}
+                {{-- Datatable profiles --}}
                 <table id="dataTable" class="table-striped dt-responsive nowrap w-100 table" style="width:100%">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Property</th>
                             <th>Name</th>
                             <th>E-mail</th>
-                            <th>Title</th>
-                            <th></th>
-                            <th>Date Received</th>
+                            <th>Employement Sector</th>
+                            <th>Employement Position</th>
+                            <th>Income</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($enquiries as $enquiry)
-                            <x-row-enquiries :enquiry="$enquiry" />
+                        @foreach ($profiles as $profile)
+                            <x-row-profiles :profile="$profile" />
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <th></th>
-                            <th>Property</th>
                             <th>Name</th>
                             <th>E-mail</th>
-                            <th>Title</th>
-                            <th></th>
-                            <th>Date Received</th>
+                            <th>Employement Sector</th>
+                            <th>Employement Position</th>
+                            <th>Income</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>
 
-                {{-- End Datatable enquiries --}}
+                {{-- End Datatable profiles --}}
             </div>
         </div>
 

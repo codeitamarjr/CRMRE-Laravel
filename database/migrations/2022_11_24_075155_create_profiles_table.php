@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('application_id')->unique();
-            $table->string('prs_code')->references('prs_code')->on('prs');
-            $table->string('property_code')->references('property_code')->on('properties')->nullable();
-            $table->set('type', [ 'Main', 'Joint', 'Guarantor' ]); // Main applicant, Joint applicant, Guarantor
-            $table->string('main_applicant_id')->references('applications_id')->on('applications')->nullable(); // If type is Joint or Guarantor, this is the main applicant
+            $table->string('profile_id')->unique();
+            $table->string('prs_code');
+            $table->string('application_id')->nullable();
+            $table->set('type', ['Main', 'Joint', 'Guarantor']); // Main applicant, Joint applicant, Guarantor
+            $table->string('main_applicant_id')->references('profiles_id')->on('profiles')->nullable(); // If type is Joint or Guarantor, this is the main applicant
             $table->string('name');
             $table->string('surname');
             $table->date('dob');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('postcode')->nullable();
-            $table->set('employment_status', ['Employed', 'Self-Employed', 'Unemployed', 'Student', 'Retired', 'Other'] );
+            $table->set('employment_status', ['Employed', 'Self-Employed', 'Unemployed', 'Student', 'Retired', 'Other']);
             $table->string('employment_sector')->nullable();
             $table->string('employment_position')->nullable();
             $table->string('employment_company')->nullable();
@@ -50,11 +50,13 @@ return new class extends Migration
             $table->string('pet_breed')->nullable();
             $table->integer('children')->nullable();
             $table->string('children_age')->nullable();
-            $table->set('HAP', [ 'yes' , 'no' ])->nullable();
+            $table->set('HAP', ['yes', 'no'])->nullable();
             $table->string('HAP_allowance')->nullable();
             $table->longText('notes')->nullable();
-            $table->set('waiting_list', [ 'yes', 'no' ])->nullable();
+            $table->set('waiting_list', ['yes', 'no'])->nullable();
             $table->set('status', ['New', 'In Progress', 'Approved', 'Declined', 'Cancelled', 'Withdrawn', 'Archived']); // New, In Progress, Approved, Declined, Cancelled, Withdrawn, Archived
+
+            $table->foreign('prs_code')->references('prs_code')->on('prs')->onDelete('cascade');
         });
     }
 
@@ -65,6 +67,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('profiles');
     }
 };
