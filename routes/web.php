@@ -149,5 +149,6 @@ Route::delete('/email-templates/{email_templates}', [EmailTemplatesController::c
 |--------------------------------------------------------------------------
 */
 Route::get('/applications', [ApplicationsController::class, 'index'])->middleware('auth');
+Route::put('/applications/{application}', [ApplicationsController::class, 'update'])->middleware('auth');
 Route::get('/applications/{application}', [ApplicationsController::class, 'show'])->middleware('auth');
 Route::delete('/applications/{application}', [ApplicationsController::class, 'destroy'])->middleware('auth');

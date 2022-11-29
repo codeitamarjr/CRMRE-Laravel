@@ -20,7 +20,8 @@ class ProfilesController extends Controller
     public function show(profiles $profiles)
     {
         return view('profiles.show', [
-            'profile' => $profiles
+            'profile' => $profiles,
+            'view' => 'read-only',
         ]);
     }
 

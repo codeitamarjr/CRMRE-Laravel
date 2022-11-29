@@ -2,7 +2,10 @@
 @php
     use App\Models\Properties;
     use App\Models\Profiles;
-    $mainApplication = Profiles::where('application_id', $application->application_id)->first();
+    use App\Models\Units;
+    $mainApplication = Profiles::where('application_id', $application->application_id)
+        ->where('type', 'Main')
+        ->first();
     $otherApplications = Profiles::where('application_id', $application->application_id)
         ->where('id', '!=', $mainApplication->id)
         ->get();
@@ -14,6 +17,8 @@
         referrerpolicy="origin"></script>
 
     <div class="container-fluid">
+
+        <!-- Page Heading -->
         <div class="row">
             <div class="col mb-4">
                 <div class="card border-start-primary py-2 shadow">
@@ -27,13 +32,12 @@
                                     Source: Daft<br>
                                     E-mail: {{ $mainApplication->email }}<br>
                                     Phone: {{ $mainApplication->phone }}<br>
-                                    Main Applicant: <a href="{{ $mainApplication->id }}">{{ $mainApplication->name }}
-                                        {{ $mainApplication->surname }}</a><br>
-                                    Other
-                                    Applicants({{ $otherApplications->count() == 0 ? 'None' : $otherApplications->count() }}):
+                                    Main Applicant: {{ $mainApplication->name }}
+                                    {{ $mainApplication->surname }}<br>
+                                    {{ $otherApplications->count() == 0 ? 'Single Applicant' : 'Other Applicants(' . $otherApplications->count() . '):' }}
                                     @foreach ($otherApplications as $otherApplication)
-                                        <a href="{{ $mainApplication->id }}/{{ $otherApplication->id }}">
-                                            {{ $otherApplication->name }} {{ $otherApplication->surname }} </a>
+                                        {{ $otherApplication->name }} {{ $otherApplication->surname }}(
+                                        {{ $otherApplication->type }})
                                         @if (!$loop->last)
                                             ,
                                         @endif
@@ -49,25 +53,40 @@
             </div>
             <div class="col mb-4">
                 <div class="card border-start-success py-2 shadow">
-
                     <div class="card-body">
                         <div class="row align-items-center no-gutters">
                             <div class="col me-2">
                                 <div class="text-uppercase text-success fw-bold mb-1 text-xs">
                                     <span>Affordability</span>
                                 </div>
-                                <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
+                                <div class="text-dark fw-bold h5 mb-0">
+                                    @if ($otherApplications->count() > 0)
+                                        <span>Household Income
+                                            €{{ number_format($otherApplications->sum('income') + $otherApplications->sum('extra_income') + $mainApplication->income + $mainApplication->extra_income, 2) }}</span>
+                                        <div class="fw-normal text-xs text-gray-400">
+                                            <span>€{{ number_format($mainApplication->income + $mainApplication->extra_income, 2) }}
+                                                (Main Applicant)</span>
+                                        </div>
+                                        <div class="fw-normal text-xs text-gray-400">
+                                            <span>€{{ number_format($otherApplications->sum('income') + $otherApplications->sum('extra_income'), 2) }}
+                                                (Other Applicants)</span>
+                                        </div>
+                                    @else
+                                        <br>
+                                        <span>Other
+                                            €{{ number_format($mainApplication->income + $mainApplication->extra_income, 2) }}</span>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                             <div class="col-auto">
-
                                 <div class="dropdown no-arrow">
                                     <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
                                         data-bs-toggle="dropdown" type="button">
-                                        <div class="btn btn-outline-primary"><i
-                                                class="fas fa-check text-success"></i>Evaluate
+                                        <div class="btn btn-outline-primary"><i class="fas fa-check text-success"></i>
+                                            Evaluate
                                         </div>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end animated--fade-in shadow" style="">
@@ -81,7 +100,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col mb-4">
@@ -93,11 +111,31 @@
                                     <span>Property</span>
                                 </div>
                                 <p class="fs-6 fw-semibold mb-0">
-                                    {{ $application->property_code }}<br>
-                                    {{ $application->unit_code }} <br>
-                                    Details: 1-bed<br>
-                                    Rent: €1500<br>
-                                    Date Available: 05/06/2000<br>
+                                    {{-- Edit buttom to open a modal #editPropertyModal --}}
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editPropertyModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+
+                                    {{ Properties::where('property_code', $application->property_code)->first() == null ? 'N/A' : Properties::where('property_code', $application->property_code)->first()->name }}<br>
+
+                                    {{-- Edit buttom to open a modal #editUnitModal --}}
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editUnitModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->type }}:
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->number }}<br>
+                                    Block:
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->block }}<br>
+                                    Floor:
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->floor }}<br>
+                                    Bedrooms:
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->bedrooms }}<br>
+                                    Car Spaces:
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->car_spaces }}<br>
+                                    Date Available:
+                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->date_available }}
                                 </p>
                             </div>
                             <div class="col-auto">
@@ -108,17 +146,100 @@
                 </div>
             </div>
         </div>
+
+        <!-- Content Row -->
         <div class="row">
             <div class="col">
                 <div class="card mb-4 shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="text-primary fw-bold m-0">Profile Details</h6>
                     </div>
-                    <x-profile-details :profile="$mainApplication" />
+                    {{-- Navitagion Tabs --}}
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true">{{ $mainApplication->name }}
+                                {{ $mainApplication->surname }}( {{ $mainApplication->type }})</button>
+                            {{-- Loop through other applications and add a button for each one --}}
+                            @foreach ($otherApplications as $otherApplication)
+                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-profile{{ $otherApplication->id }}" type="button" role="tab"
+                                    aria-controls="nav-profile" aria-selected="false">{{ $otherApplication->name }}
+                                    {{ $otherApplication->surname }}( {{ $otherApplication->type }})</button>
+                            @endforeach
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <x-profile-details :profile="$mainApplication" />
+                        </div>
+                        {{-- Loop through other applications and add a tab for each --}}
+                        @foreach ($otherApplications as $otherApplication)
+                            <div class="tab-pane fade" id="nav-profile{{ $otherApplication->id }}" role="tabpanel"
+                                aria-labelledby="nav-profile-tab">
+                                <x-profile-details :profile="$otherApplication" />
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- #editPropertyModal modal --}}
+    <div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form method="POST" action="/applications/{{ $application->id }}">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Property</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Select New Property</p>
+                        <x-select-properties />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- #editUnitModal Modal --}}
+    <div class="modal fade" id="editUnitModal" tabindex="-1" aria-labelledby="editUnitModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form method="POST" action="/applications/{{ $application->id }}">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Unit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Select New
+                            {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->type }}
+                        </p>
+                        <x-select-units :property_code="$application->property_code" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <script>
         tinymce.init({
             selector: '#tinyTextArea',
