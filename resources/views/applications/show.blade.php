@@ -1,15 +1,4 @@
 @extends('layout')
-@php
-    use App\Models\Properties;
-    use App\Models\Profiles;
-    use App\Models\Units;
-    $mainApplication = Profiles::where('application_id', $application->application_id)
-        ->where('type', 'Main')
-        ->first();
-    $otherApplications = Profiles::where('application_id', $application->application_id)
-        ->where('id', '!=', $mainApplication->id)
-        ->get();
-@endphp
 
 @section('content')
     {{-- Load TinyMCE --}}
@@ -30,12 +19,12 @@
                                 </div>
                                 <p class="fs-6 fw-semibold mb-0">
                                     Source: Daft<br>
-                                    E-mail: {{ $mainApplication->email }}<br>
-                                    Phone: {{ $mainApplication->phone }}<br>
-                                    Main Applicant: {{ $mainApplication->name }}
-                                    {{ $mainApplication->surname }}<br>
-                                    {{ $otherApplications->count() == 0 ? 'Single Applicant' : 'Other Applicants(' . $otherApplications->count() . '):' }}
-                                    @foreach ($otherApplications as $otherApplication)
+                                    E-mail: {{ $mainProfile->email }}<br>
+                                    Phone: {{ $mainProfile->phone }}<br>
+                                    Main Applicant: {{ $mainProfile->name }}
+                                    {{ $mainProfile->surname }}<br>
+                                    {{ $otherProfiles->count() == 0 ? 'Single Applicant' : 'Other Applicants(' . $otherProfiles->count() . '):' }}
+                                    @foreach ($otherProfiles as $otherApplication)
                                         {{ $otherApplication->name }} {{ $otherApplication->surname }}(
                                         {{ $otherApplication->type }})
                                         @if (!$loop->last)
@@ -60,21 +49,29 @@
                                     <span>Affordability</span>
                                 </div>
                                 <div class="text-dark fw-bold h5 mb-0">
-                                    @if ($otherApplications->count() > 0)
+                                    @if ($otherProfiles->count() > 0)
                                         <span>Household Income
-                                            €{{ number_format($otherApplications->sum('income') + $otherApplications->sum('extra_income') + $mainApplication->income + $mainApplication->extra_income, 2) }}</span>
-                                        <div class="fw-normal text-xs text-gray-400">
-                                            <span>€{{ number_format($mainApplication->income + $mainApplication->extra_income, 2) }}
+                                            €{{ number_format(
+                                                $otherProfiles->sum('income') +
+                                                    $otherProfiles->sum('extra_income') +
+                                                    $otherProfiles->sum('HAP_allowance') +
+                                                    $mainProfile->income +
+                                                    $mainProfile->extra_income +
+                                                    $mainProfile->HAP_allowance,
+                                                2,
+                                            ) }}</span>
+                                        <div class="fw-normal text-xs text-gray-600">
+                                            <span>€{{ number_format($mainProfile->income + $mainProfile->extra_income + $mainProfile->HAP_allowance, 2) }}
                                                 (Main Applicant)</span>
                                         </div>
-                                        <div class="fw-normal text-xs text-gray-400">
-                                            <span>€{{ number_format($otherApplications->sum('income') + $otherApplications->sum('extra_income'), 2) }}
+                                        <div class="fw-normal text-xs text-gray-600">
+                                            <span>€{{ number_format($otherProfiles->sum('income') + $otherProfiles->sum('extra_income') + $otherProfiles->sum('HAP_allowance'), 2) }}
                                                 (Other Applicants)</span>
                                         </div>
                                     @else
                                         <br>
                                         <span>Other
-                                            €{{ number_format($mainApplication->income + $mainApplication->extra_income, 2) }}</span>
+                                            €{{ number_format($mainProfile->income + $mainProfile->extra_income, 2) }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -117,25 +114,25 @@
                                         <i class="fas fa-edit"></i>
                                     </button>
 
-                                    {{ Properties::where('property_code', $application->property_code)->first() == null ? 'N/A' : Properties::where('property_code', $application->property_code)->first()->name }}<br>
+                                    {{ $property == null ? 'N/A' : $property->name }}<br>
 
                                     {{-- Edit buttom to open a modal #editUnitModal --}}
                                     <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#editUnitModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->type }}:
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->number }}<br>
+                                    {{ $unit == null ? 'N/A' : $unit->type }}:
+                                    {{ $unit == null ? 'N/A' : $unit->number }}<br>
                                     Block:
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->block }}<br>
+                                    {{ $unit == null ? 'N/A' : $unit->block }}<br>
                                     Floor:
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->floor }}<br>
+                                    {{ $unit == null ? 'N/A' : $unit->floor }}<br>
                                     Bedrooms:
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->bedrooms }}<br>
+                                    {{ $unit == null ? 'N/A' : $unit->bedrooms }}<br>
                                     Car Spaces:
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->car_spaces }}<br>
+                                    {{ $unit == null ? 'N/A' : $unit->car_spaces }}<br>
                                     Date Available:
-                                    {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->date_available }}
+                                    {{ $unit == null ? 'N/A' : $unit->date_available }}
                                 </p>
                             </div>
                             <div class="col-auto">
@@ -159,27 +156,36 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                aria-selected="true">{{ $mainApplication->name }}
-                                {{ $mainApplication->surname }}( {{ $mainApplication->type }})</button>
+                                aria-selected="true">{{ $mainProfile->name }}
+                                {{ $mainProfile->surname }}( {{ $mainProfile->type }})
+                                <a class="btn btn-sm btn-outline-secondary" href="/profiles/{{ $mainProfile->id }}/edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </button>
                             {{-- Loop through other applications and add a button for each one --}}
-                            @foreach ($otherApplications as $otherApplication)
+                            @foreach ($otherProfiles as $otherApplication)
                                 <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#nav-profile{{ $otherApplication->id }}" type="button" role="tab"
                                     aria-controls="nav-profile" aria-selected="false">{{ $otherApplication->name }}
-                                    {{ $otherApplication->surname }}( {{ $otherApplication->type }})</button>
+                                    {{ $otherApplication->surname }}( {{ $otherApplication->type }})
+                                    <a class="btn btn-sm btn-outline-secondary"
+                                        href="/profiles/{{ $otherApplication->id }}/edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </button>
                             @endforeach
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <x-profile-details :profile="$mainApplication" />
+                            <x-profile-view :profile="$mainProfile" />
                         </div>
                         {{-- Loop through other applications and add a tab for each --}}
-                        @foreach ($otherApplications as $otherApplication)
+                        @foreach ($otherProfiles as $otherApplication)
                             <div class="tab-pane fade" id="nav-profile{{ $otherApplication->id }}" role="tabpanel"
                                 aria-labelledby="nav-profile-tab">
-                                <x-profile-details :profile="$otherApplication" />
+                                <x-profile-view :profile="$otherApplication" />
                             </div>
                         @endforeach
                     </div>
@@ -226,7 +232,7 @@
                     </div>
                     <div class="modal-body">
                         <p>Select New
-                            {{ Units::where('unit_code', $application->unit_code)->first() == null ? 'N/A' : Units::where('unit_code', $application->unit_code)->first()->type }}
+                            {{ $unit == null ? 'N/A' : $unit->type }}
                         </p>
                         <x-select-units :property_code="$application->property_code" />
                     </div>

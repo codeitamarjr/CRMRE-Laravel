@@ -113,20 +113,13 @@ Route::put('/units/{unit}', [UnitsController::class, 'update'])->middleware('aut
 // Delete Unit
 Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware('auth');
 
-// Show All Profiles
 Route::get('/profiles', [ProfilesController::class, 'index'])->middleware('auth');
-// Create Application
 Route::get('/profiles/create', [ProfilesController::class, 'create'])->middleware('auth');
-// Store Application Data
 Route::post('/profiles', [ProfilesController::class, 'store'])->middleware('auth');
-// Show Single Application
-Route::get('/profiles/{application}', [ProfilesController::class, 'show'])->middleware('auth');
-// Edit Application
-Route::get('/profiles/{application}/edit', [ProfilesController::class, 'edit'])->middleware('auth');
-// Update Application
-Route::put('/profiles/{application}', [ProfilesController::class, 'update'])->middleware('auth');
-// Delete Application
-Route::delete('/profiles/{application}', [ProfilesController::class, 'destroy'])->middleware('auth');
+Route::get('/profiles/{profile}', [ProfilesController::class, 'show'])->middleware('auth');
+Route::get('/profiles/{profile}/edit', [ProfilesController::class, 'edit'])->middleware('auth');
+Route::put('/profiles/{profile}', [ProfilesController::class, 'update'])->middleware('auth');
+Route::delete('/profiles/{profile}', [ProfilesController::class, 'destroy'])->middleware('auth');
 
 // Index Email Templates
 Route::get('/email-templates', [EmailTemplatesController::class, 'index'])->middleware('auth');

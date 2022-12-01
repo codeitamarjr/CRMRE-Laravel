@@ -1,8 +1,4 @@
 @props(['profile'])
-@php
-    use App\Models\Profiles;
-    use App\Models\Properties;
-@endphp
 
 <div class="container-fluid">
     <div class="row d-flex justify-content-center align-items-center h-100">
