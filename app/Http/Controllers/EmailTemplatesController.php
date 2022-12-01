@@ -11,14 +11,14 @@ class EmailTemplatesController extends Controller
     // Show Index Templates
     public function index()
     {
-        return view('email_templates.index', [
+        return view('email-templates.index', [
             'email_templates' => Auth::user()->prs->email_templates
         ]);
     }
     // Show Single Email Template
     public function show($id)
     {
-        return view('email_templates.show', [
+        return view('email-templates.show', [
             'email_template' => Auth::user()->prs->email_templates->find($id)
         ]);
     }
@@ -26,7 +26,7 @@ class EmailTemplatesController extends Controller
     // Create Email Template
     public function create()
     {
-        return view('email_templates.create');
+        return view('email-templates.create');
     }
 
     // Store Email Template
@@ -56,7 +56,7 @@ class EmailTemplatesController extends Controller
     // Edit Email Template
     public function edit(EmailTemplates $email_templates)
     {
-        return view('email_templates.edit', [
+        return view('email-templates.edit', [
             'email_template' => $email_templates
         ]);
     }

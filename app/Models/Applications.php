@@ -9,6 +9,12 @@ class Applications extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status',
+        'property_code',
+        'unit_code',
+    ];
+
     // Relationship to PRS
     public function prs()
     {

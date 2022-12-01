@@ -17,10 +17,10 @@ class ProfilesController extends Controller
     }
 
     // Show Application
-    public function show(profiles $profiles)
+    public function show(profiles $profile)
     {
         return view('profiles.show', [
-            'profile' => $profiles
+            'profile' => $profile,
         ]);
     }
 
@@ -80,9 +80,11 @@ class ProfilesController extends Controller
     }
 
     // Edit Application
-    public function edit(Profiles $profile)
+    public function edit(profiles $profile)
     {
-        return view('profiles.edit', compact('profile'));
+        return view('profiles.edit', [
+            'profile' => $profile,
+        ]);
     }
 
     // Update Application
