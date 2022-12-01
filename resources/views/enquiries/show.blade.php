@@ -33,10 +33,30 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-end animated--fade-in shadow">
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal">&nbsp;Send Welcome
-                            E-mail</a>
-                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendViewing">&nbsp;Send Viewing
-                            E-mail</a>
+                        @if ($emailTemplates == null || $emailTemplates->count() == 0)
+                            <a class="dropdown-item alert alert-warning d-flex align-items-center"
+                                href="/email-templates/create">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi bi-exclamation-triangle-fill me-2 flex-shrink-0" viewBox="0 0 16 16"
+                                    role="img" aria-label="Warning:">
+                                    <path
+                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg>
+                                <div>
+                                    No email templates
+                                    found. Click here to
+                                    create one.
+                                </div>
+                            </a>
+                        @else
+                            @foreach ($emailTemplates as $emailTemplate)
+                                @if ($emailTemplate->property_code == $enquiry->property_code || $emailTemplate->property_code == null)
+                                    <a class="dropdown-item"
+                                        href="/email-templates/{{ $emailTemplate->id }}/send/{{ $enquiry->id }}">Send
+                                        {{ $emailTemplate->name }}</a>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

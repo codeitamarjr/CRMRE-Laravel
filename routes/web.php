@@ -38,20 +38,13 @@ use App\Http\Controllers\EmailTemplatesController;
 // Home Page open dashboard
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
-// Show All enquiries
 Route::get('/enquiries', [EnquiriesController::class, 'index'])->middleware('auth');
-// Create Enquiry
-Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middleware('auth');
-// Store Enquiry Data
-Route::post('/enquiries', [EnquiriesController::class, 'store'])->middleware('auth');
-// Edit Enquiry
-Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit'])->middleware('auth');
-// Update Enquiry
-Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update'])->middleware('auth');
-// Delete Enquiry
-Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy'])->middleware('auth');
-// Show Single Enquiry
 Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
+Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middleware('auth');
+Route::post('/enquiries', [EnquiriesController::class, 'store'])->middleware('auth');
+Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit'])->middleware('auth');
+Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update'])->middleware('auth');
+Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy'])->middleware('auth');
 
 // Create User Form
 Route::get('/register', [UserController::class, 'create'])->middleware('auth');

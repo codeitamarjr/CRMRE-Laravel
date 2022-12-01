@@ -38,4 +38,10 @@ class Enquiries extends Model
     {
         return $this->belongsTo(PRS::class, 'prs_code', 'prs_code');
     }
+
+    // Relationship to Email Templates
+    public function emailTemplates()
+    {
+        return $this->hasMany(EmailTemplates::class, 'prs_code', 'prs_code')->where('ENQ', '1');
+    }
 }

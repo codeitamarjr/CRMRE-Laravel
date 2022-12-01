@@ -14,7 +14,10 @@ class EnquiriesController extends Controller
     public function index()
     {
         return view('enquiries.index', [
-            'enquiries' => Auth::user()->enquiries->sortByDesc('created_at'),
+            'enquiries' => Auth::user()
+                ->enquiries
+                ->sortByDesc('created_at')
+            //search request('search')
         ]);
     }
 
@@ -22,7 +25,9 @@ class EnquiriesController extends Controller
     public function show(enquiries $enquiries)
     {
         return view('enquiries.show', [
-            'enquiry' => $enquiries
+            'enquiry' => $enquiries,
+            'emailTemplates' => $enquiries
+                ->emailTemplates
         ]);
     }
 
