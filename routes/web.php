@@ -39,8 +39,8 @@ use App\Http\Controllers\EmailTemplatesController;
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/enquiries', [EnquiriesController::class, 'index'])->middleware('auth');
-Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
 Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middleware('auth');
+Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
 Route::post('/enquiries', [EnquiriesController::class, 'store'])->middleware('auth');
 Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit'])->middleware('auth');
 Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update'])->middleware('auth');
