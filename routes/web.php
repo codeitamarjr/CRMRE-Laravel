@@ -5,6 +5,7 @@ use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnitsController;
 use App\Http\Controllers\ClientsController;
@@ -138,3 +139,12 @@ Route::get('/applications', [ApplicationsController::class, 'index'])->middlewar
 Route::put('/applications/{application}', [ApplicationsController::class, 'update'])->middleware('auth');
 Route::get('/applications/{application}', [ApplicationsController::class, 'show'])->middleware('auth');
 Route::delete('/applications/{application}', [ApplicationsController::class, 'destroy'])->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| Send Email Routes
+|--------------------------------------------------------------------------
+*/
+
+// Send Enquiry Email Template
+Route::get('/email-templates/{email_templates}/enquiry-reply/{enquiry}', [MailController::class, 'sendEnquiryEmail'])->middleware('auth');

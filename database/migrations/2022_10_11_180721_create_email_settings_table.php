@@ -19,17 +19,15 @@ return new class extends Migration
             $table->string('prs_code');
             $table->string('email_code');
             $table->string('service_provider');
-            $table->string('service_name');
-            $table->string('email');
+            $table->string('username');
             $table->string('password');
             $table->string('host');
             $table->string('port');
             $table->string('encryption');
             $table->string('from_name');
-            $table->string('from_email');
-            $table->string('reply_to_name');
-            $table->string('reply_to_email');
-            $table->string('user_id')->references('id')->on('users');
+            $table->string('from_address');
+            $table->string('reply_to_name')->nullable();
+            $table->string('reply_to_address')->nullable();
         });
     }
 

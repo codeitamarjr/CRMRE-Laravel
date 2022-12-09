@@ -41,17 +41,15 @@ class DatabaseSeeder extends Seeder
             'prs_code' => 'PRS1',
             'email_code' => 'EMAIL0001',
             'service_provider' => 'G Demo Provider',
-            'service_name' => 'Gmail',
-            'email' => 'test@gmail.com',
+            'username' => 'test@gmail.com',
             'password' => 'password',
             'host' => 'smtp.gmail.com',
             'port' => '587',
             'encryption' => 'tls',
             'from_name' => 'Admin',
-            'from_email' => 'test@gmail.com',
+            'from_address' => 'test@gmail.com',
             'reply_to_name' => 'Admin',
-            'reply_to_email' => 'reply@mail.com',
-            'user_id' => '1',
+            'reply_to_address' => 'reply@mail.com',
         ]);
 
 

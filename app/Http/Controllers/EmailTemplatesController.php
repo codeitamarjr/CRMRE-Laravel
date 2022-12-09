@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmailTemplates;
+use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

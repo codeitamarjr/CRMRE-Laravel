@@ -52,7 +52,7 @@
                             @foreach ($emailTemplates as $emailTemplate)
                                 @if ($emailTemplate->property_code == $enquiry->property_code || $emailTemplate->property_code == null)
                                     <a class="dropdown-item"
-                                        href="/email-templates/{{ $emailTemplate->id }}/send/{{ $enquiry->id }}">Send
+                                        href="/email-templates/{{ $emailTemplate->id }}/enquiry-reply/{{ $enquiry->id }}">Send
                                         {{ $emailTemplate->name }}</a>
                                 @endif
                             @endforeach
