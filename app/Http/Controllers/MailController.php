@@ -14,7 +14,14 @@ class MailController extends Controller
     //
     public function sendEnquiryEmail(EmailTemplates $email_templates, Enquiries $enquiry)
     {
-        Mail::to($enquiry->contact_email)->send(new TemplatesEmail($email_templates));
+        /* Send email to the contact_email from enquiry */
+        Mail::to($enquiry->contact_email)
+            ->send(
+                /* Send the email with the template object */
+                new TemplatesEmail(
+                    $email_templates
+                )
+            );
         // Go back with success message
         return redirect()->back()->with('success', 'Email sent successfully');
     }
