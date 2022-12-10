@@ -1,5 +1,9 @@
 @props(['profile'])
 
+{{-- Load TinyMCE --}}
+<script src="https://cdn.tiny.cloud/1/wqh1zddiefonsyraeh8x3jwdkrswjtgv49fuarkvu1ggr9ad/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
 <div class="container-fluid">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
@@ -256,3 +260,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    tinymce.init({
+        selector: '#tinyTextArea',
+        //toolbar_location: 'bottom',
+        visual: false,
+        menubar: false,
+        statusbar: false,
+        height: 300,
+    });
+</script>

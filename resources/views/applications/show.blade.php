@@ -28,7 +28,7 @@
                                         {{ $otherApplication->name }} {{ $otherApplication->surname }}(
                                         {{ $otherApplication->type }})
                                         @if (!$loop->last)
-                                            ,
+                                            ,<br>
                                         @endif
                                     @endforeach
                                 </p>
@@ -79,6 +79,19 @@
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                             <div class="col-auto">
+                                {{-- Status of this application --}}
+                                <div class="btn btn-outline-success">
+                                    @if ($application->status == 'Pending')
+                                        <i class="fas fa-clock text-warning"></i>
+                                    @elseif ($application->status == 'Approved')
+                                        <i class="fas fa-check text-success"></i>
+                                    @elseif ($application->status == 'Denied')
+                                        <i class="fas fa-times text-danger"></i>
+                                    @elseif ($application->status == 'Unsuitable')
+                                        <i class="fas fa-times text-danger"></i>
+                                    @endif
+                                    {{ $application->status }}
+                                </div>
                                 <div class="dropdown no-arrow">
                                     <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
                                         data-bs-toggle="dropdown" type="button">
@@ -88,10 +101,17 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end animated--fade-in shadow" style="">
                                         <p class="dropdown-header text-center">Outcome:</p>
-                                        <a class="dropdown-item" href="#">&nbsp;Approve</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">&nbsp;Deny</a>
-
+                                        <form method="POST" action="/applications/{{ $application->id }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="dropdown-item" name="status"
+                                                value="Approved">&nbsp;Approve</button>
+                                            <div class="dropdown-divider"></div>
+                                            <button type="submit" class="dropdown-item" name="status"
+                                                value="Denied">&nbsp;Deny</button>
+                                            <button type="submit" class="dropdown-item" name="status"
+                                                value="Unsuitable">&nbsp;Unsuitable</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

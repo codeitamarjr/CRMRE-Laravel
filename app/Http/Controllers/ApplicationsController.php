@@ -39,12 +39,13 @@ class ApplicationsController extends Controller
     {
 
         $data = $request->validate([
-            'status' => 'string|max:255',
+            /* status is a string "Approved" or "Denied" */
+            'status' => 'string|in:Approved,Denied,Unsuitable',
             'property_code' => 'string|max:255',
             'unit_code' => 'string|max:255',
         ]);
 
-        // Clean unit_code when property_code is updated
+        /* Clean unit_code when property_code is changed */
         if (!empty($data['property_code'])) {
             if ($data['property_code'] != $application['property_code']) {
                 $application->unit_code = null;
