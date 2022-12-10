@@ -10,19 +10,20 @@
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <li class="nav-item"><a class="nav-link {{ request()->is('enquiries') ? 'active' : '' }}" href="/enquiries">
+            <li class="nav-item"><a class="nav-link {{ request()->is('enquiries*') ? 'active' : '' }}"
+                    href="/enquiries">
                     <i class="fas fa-user"></i>
                     <span>Enquiries</span></a>
             </li>
-            <li class="nav-item"><a class="nav-link {{ request()->is('profiles') ? 'active' : '' }}" href="/profiles">
+            <li class="nav-item"><a class="nav-link {{ request()->is('profiles*') ? 'active' : '' }}" href="/profiles">
                     <i class="fa-solid fa-id-card"></i>
                     <span>Profiles</span></a>
             </li>
-            <li class="nav-item"><a class="nav-link {{ request()->is('applications') ? 'active' : '' }}"
+            <li class="nav-item"><a class="nav-link {{ request()->is('applications*') ? 'active' : '' }}"
                     href="/applications">
                     <i class="fas fa-file-alt"></i>
                     <span>Applications</span></a>
-            <li class="nav-item"><a class="nav-link {{ request()->is('email-templates') ? 'active' : '' }}"
+            <li class="nav-item"><a class="nav-link {{ request()->is('email-templates*') ? 'active' : '' }}"
                     href="/email-templates">
                     <i class="fa-solid fa-envelope-open-text"></i>
                     <span>Email Templates</span></a>
