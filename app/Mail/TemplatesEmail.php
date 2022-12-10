@@ -19,7 +19,7 @@ class TemplatesEmail extends Mailable
      */
     public function __construct(EmailTemplates $email_templates)
     {
-        // Load the email template and pass it to the view
+        /* Set the email template object */
         $this->email_templates = $email_templates;
     }
 
@@ -30,6 +30,7 @@ class TemplatesEmail extends Mailable
      */
     public function build()
     {
+        /* Build the email with the template object */
         return $this->view('mails.templates', [
             'email_templates' => $this->email_templates
         ]);

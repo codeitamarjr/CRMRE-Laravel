@@ -11,18 +11,24 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
-    //
+    /**
+     * Send the Email Template object to Enquiry object
+     *
+     * @param EmailTemplates $email_templates
+     * @param Enquiries $enquiry
+     * @return void
+     */
     public function sendEnquiryEmail(EmailTemplates $email_templates, Enquiries $enquiry)
     {
-        /* Send email to the contact_email from enquiry */
+        /* Send email to the contact_email from enquiry object*/
         Mail::to($enquiry->contact_email)
             ->send(
-                /* Send the email with the template object */
+                /* Send the email with the template object received */
                 new TemplatesEmail(
                     $email_templates
                 )
             );
-        // Go back with success message
-        return redirect()->back()->with('success', 'Email sent successfully');
+        /* Go back to enquiries page with success message */
+        return redirect('enquiries')->with('success', 'Email sent successfully');
     }
 }

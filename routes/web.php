@@ -39,6 +39,11 @@ use App\Http\Controllers\EmailTemplatesController;
 // Home Page open dashboard
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
+/*
+|--------------------------------------------------------------------------
+| Enquiries Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/enquiries', [EnquiriesController::class, 'index'])->middleware('auth');
 Route::get('/enquiries/create', [EnquiriesController::class, 'create'])->middleware('auth');
 Route::get('/enquiries/{enquiries}', [EnquiriesController::class, 'show'])->middleware('auth');
@@ -47,66 +52,63 @@ Route::get('/enquiries/{enquiries}/edit', [EnquiriesController::class, 'edit'])-
 Route::put('/enquiries/{enquiries}', [EnquiriesController::class, 'update'])->middleware('auth');
 Route::delete('/enquiries/{enquiries}', [EnquiriesController::class, 'destroy'])->middleware('auth');
 
-// Create User Form
+/*
+|--------------------------------------------------------------------------
+| System Users Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/register', [UserController::class, 'create'])->middleware('auth');
-// Store New User
 Route::post('/users', [UserController::class, 'store'])->middleware('auth');
-// Logout User
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-// Show Login Form
 Route::get('/login', [UserController::class, 'login'])->name('login');
-// Login User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-// Edit User Profile
 Route::get('/users/edit', [UserController::class, 'edit'])->middleware('auth');
-// Update User Profile
 Route::put('/users/update', [UserController::class, 'update'])->middleware('auth');
-// Update User Avatar
 Route::post('/users/avatar', [UserController::class, 'updateAvatar'])->middleware('auth');
 
-// Show All Clients
+/*
+|--------------------------------------------------------------------------
+| Clients Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/clients', [ClientsController::class, 'index'])->middleware('auth');
-// Create Client
 Route::get('/clients/create', [ClientsController::class, 'create'])->middleware('auth');
-// Store Client Data
 Route::post('/clients', [ClientsController::class, 'store'])->middleware('auth');
-// Edit Client
 Route::get('/clients/{client}/edit', [ClientsController::class, 'edit'])->middleware('auth');
-// Update Client
 Route::put('/clients/{client}', [ClientsController::class, 'update'])->middleware('auth');
-// Delete Client
 Route::delete('/clients/{client}', [ClientsController::class, 'destroy'])->middleware('auth');
-// Update Client Logo
 Route::post('/clients/logo', [ClientsController::class, 'updateLogo'])->middleware('auth');
 
-// Show All Properties
+/*
+|--------------------------------------------------------------------------
+| Properties Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/properties', [PropertiesController::class, 'index'])->middleware('auth');
-// Create Property
 Route::get('/properties/create', [PropertiesController::class, 'create'])->middleware('auth');
-// Store Property Data
 Route::post('/properties', [PropertiesController::class, 'store'])->middleware('auth');
-// Edit Property
 Route::get('/properties/{property}/edit', [PropertiesController::class, 'edit'])->middleware('auth');
-// Update Property
 Route::put('/properties/{property}', [PropertiesController::class, 'update'])->middleware('auth');
-// Delete Property
 Route::delete('/properties/{property}', [PropertiesController::class, 'destroy'])->middleware('auth');
 
-// Show All Units
+/*
+|--------------------------------------------------------------------------
+| Units Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/units', [UnitsController::class, 'index'])->middleware('auth');
-// Create Unit
 Route::get('/units/create', [UnitsController::class, 'create'])->middleware('auth');
-// Store Unit Data
 Route::post('/units', [UnitsController::class, 'store'])->middleware('auth');
-// Show Single Unit
 Route::get('/units/{unit}', [UnitsController::class, 'show'])->middleware('auth');
-// Edit Unit
 Route::get('/units/{unit}/edit', [UnitsController::class, 'edit'])->middleware('auth');
-// Update Unit
 Route::put('/units/{unit}', [UnitsController::class, 'update'])->middleware('auth');
-// Delete Unit
 Route::delete('/units/{unit}', [UnitsController::class, 'destroy'])->middleware('auth');
 
+/*
+|--------------------------------------------------------------------------
+| Profiles Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/profiles', [ProfilesController::class, 'index'])->middleware('auth');
 Route::get('/profiles/create', [ProfilesController::class, 'create'])->middleware('auth');
 Route::post('/profiles', [ProfilesController::class, 'store'])->middleware('auth');
@@ -115,19 +117,17 @@ Route::get('/profiles/{profile}/edit', [ProfilesController::class, 'edit'])->mid
 Route::put('/profiles/{profile}', [ProfilesController::class, 'update'])->middleware('auth');
 Route::delete('/profiles/{profile}', [ProfilesController::class, 'destroy'])->middleware('auth');
 
-// Index Email Templates
+/*
+|--------------------------------------------------------------------------
+| Email Templates Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/email-templates', [EmailTemplatesController::class, 'index'])->middleware('auth');
-// Create Email Template
 Route::get('/email-templates/create', [EmailTemplatesController::class, 'create'])->middleware('auth');
-// Store Email Template
 Route::post('/email-templates', [EmailTemplatesController::class, 'store'])->middleware('auth');
-// Edit Email Template
 Route::get('/email-templates/{email_templates}/edit', [EmailTemplatesController::class, 'edit'])->middleware('auth');
-// Update Email Template
 Route::put('/email-templates/{email_templates}', [EmailTemplatesController::class, 'update'])->middleware('auth');
-// Show Single Email Template
 Route::get('/email-templates/{email_templates}', [EmailTemplatesController::class, 'show'])->middleware('auth');
-// Delete Email Template
 Route::delete('/email-templates/{email_templates}', [EmailTemplatesController::class, 'destroy'])->middleware('auth');
 
 /*
@@ -145,6 +145,5 @@ Route::delete('/applications/{application}', [ApplicationsController::class, 'de
 | Send Email Routes
 |--------------------------------------------------------------------------
 */
-
-// Send Enquiry Email Template
+/* Send Enquiry Email Template */
 Route::get('/email-templates/{email_templates}/enquiry-reply/{enquiry}', [MailController::class, 'sendEnquiryEmail'])->middleware('auth');
